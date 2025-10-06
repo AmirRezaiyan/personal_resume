@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Amir Rezaiyan | Backend Developer Resume</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Google Fonts (Inter) for LTR/English -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Load Vazirmatn Font (Reliable Persian Font via Google Fonts CDN) -->
+    <!-- این لینک بسیار قابل اطمینان‌تر از CDN مبتنی بر گیت‌هاب است و باید مشکل فونت را حل کند -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Load Typed.js for typing animation -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Load GSAP & ScrollTrigger for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        /* General Setup & Custom Glassmorphism Styles */
+        body {
+            /* Default Font: Inter for LTR */
+            font-family: 'Inter', sans-serif;
+            background: #0D1117;
+            /* GitHub Dark Mode background */
+            color: #E6EDF3;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: direction 0.3s, text-align 0.3s;
+        }
+
+        /* IranSans/Vazirmatn Font Application (Applied only when the body has the 'rtl' class) */
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+            /* *** تغییر مهم: استفاده از Vazirmatn به عنوان فونت اصلی برای تضمین بارگذاری از CDN مطمئن گوگل *** */
+            font-family: 'Vazirmatn', 'IranSans', 'Inter', sans-serif !important; 
+        }
+
+        /* Override general center alignment for RTL sections like Bio and Contact Text */
+        body.rtl .text-center {
+            text-align: center !important;
+        }
+
+        /* Glassmorphism Effect Class */
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Semi-transparent white */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive Architecture Diagram Styling (SVG - Keeping node styles) */
+        .arch-node {
+            transition: all 0.3s ease;
+        }
+
+        .arch-node-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* Style for Typed.js cursor */
+        .typed-cursor {
+            opacity: 1;
+            -webkit-animation: blink 0.7s infinite;
+            -moz-animation: blink 0.7s infinite;
+            animation: blink 0.7s infinite;
+            font-weight: 300;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Ensure smooth scroll for navigation/sections */
+        html {
+            scroll-behavior: smooth;
+        }
+        h3 {
+            padding: 10px;
+        }
+        /* Utility classes for dynamic content */
+        .default-profile-icon {
+            opacity: 0.8;
+            fill: #E6EDF3;
+        }
+
+        /* Metric Value Styling (Larger to match site scale) */
+        .metric-value {
+            font-size: 4rem;
+            line-height: 1;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Utility styles for tags and contact buttons */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5BC0BE;
+            background-color: rgba(91, 192, 190, 0.1);
+            border-radius: 9999px;
+            border: 1px solid rgba(91, 192, 190, 0.3);
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .skill-tag:hover {
+            background-color: rgba(91, 192, 190, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            color: white;
+            font-weight: 700;
+            border-radius: 9999px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 250px;
+            justify-content: center;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline Styling - LTR Default */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: rgba(91, 192, 190, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: #5BC0BE;
+            border: 4px solid #4A90E2;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid rgba(255, 255, 255, 0.1);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid rgba(255, 255, 255, 0.1);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
+        }
+
+        .right::after {
+            left: -10px;
+            right: unset;
+        }
+
+        /* Timeline Styling - RTL Overrides */
+        body.rtl .timeline::after {
+            right: 50%;
+            left: unset;
+            margin-right: -2px;
+        }
+
+        body.rtl .timeline-container {
+            text-align: right;
+        }
+
+        body.rtl .left {
+            right: 50%;
+            left: unset;
+        }
+
+        body.rtl .right {
+            left: 0;
+            right: unset;
+        }
+
+        body.rtl .timeline-container::after {
+            right: unset;
+            left: 30px;
+        }
+
+        body.rtl .left::after {
+            right: unset;
+            left: 30px;
+        }
+
+        body.rtl .right::after {
+            right: unset;
+            left: 30px;
+        }
+
+        body.rtl .left::before {
+            right: unset;
+            left: 30px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
+        }
+
+        body.rtl .right::before {
+            left: unset;
+            right: 30px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+
+            .left::after,
+            .right::after {
+                left: 21px;
+            }
+
+            .right {
+                left: 0%;
+            }
+
+            .left::before,
+            .right::before {
+                display: none;
+            }
+
+            .timeline-content {
+                text-align: left;
+            }
+
+            /* Responsive RTL for timeline */
+            body.rtl .timeline::after {
+                right: 31px;
+                left: unset;
+            }
+
+            body.rtl .timeline-container {
+                padding-right: 70px;
+                padding-left: 25px;
+                text-align: right;
+            }
+
+            body.rtl .left::after,
+            body.rtl .right::after {
+                right: 21px;
+                left: unset;
+            }
+
+            body.rtl .right {
+                right: 0%;
+                left: unset;
+            }
+
+            body.rtl .left {
+                right: 0%;
+                left: unset;
+            }
+
+            body.rtl .timeline-content {
+                text-align: right;
+            }
+
+            /* Adjust text alignment for mobile in RTL */
+            body.rtl .md\:text-left {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#0D1117] min-h-screen p-4 sm:p-8">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 glass-card border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <!-- Left Side: Initials & Logo -->
+            <h1 class="text-2xl font-bold text-[#5BC0BE] tracking-wider" data-i18n="header_initials">A.R.</h1>
+
+            <!-- Right Side: Navigation & Language Switcher -->
+            <div class="flex items-center space-x-6">
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-gray-300">
+                    <a href="#introduction" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_intro">Intro</a>
+                    <a href="#metrics" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_highlights">Highlights</a>
+                    <a href="#skills" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_skills">Skills</a>
+                    <a href="#architecture" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_architecture">Architecture</a>
+                    <a href="#deep-dives" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_deep_dives">Deep Dives</a>
+                    <a href="#experience" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_experience">Experience</a>
+                    <a href="#contact" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_contact">Contact</a>
+                </nav>
+
+                <!-- Language Switcher Button: Text updated dynamically in JS -->
+                <button id="lang-toggle"
+                    class="p-2 w-24 bg-[#4A90E2] text-white font-bold rounded-full shadow-lg hover:bg-[#72B9FF] transition duration-300 text-sm">
+                    FA / EN
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto pt-24 space-y-24">
+
+        <!-- 1. Introduction Section -->
+        <section id="introduction" class="grid md:grid-cols-3 gap-8 items-center p-6 sm:p-10 glass-card rounded-3xl">
+            <!-- Left: Profile Image -->
+            <div class="col-span-3 md:col-span-1 flex justify-center md:justify-start">
+                <div
+                    class="w-48 h-48 rounded-full bg-gray-700 p-2 ring-4 ring-[#4A90E2] shadow-2xl overflow-hidden relative">
+                    <!-- Container for Profile Image (Image or SVG) -->
+                    <div id="profile-picture-container" class="w-full h-full flex items-center justify-center">
+                        <!-- Default SVG Placeholder (Initially Visible) -->
+                        <svg id="default-profile-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-full h-full p-6 default-profile-icon">
+                            <path fill-rule="evenodd"
+                                d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.61-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Text Content -->
+            <div class="col-span-3 md:col-span-2 text-center md:text-left">
+                <p class="text-xl font-medium text-[#5BC0BE]" data-i18n="intro_greeting">Hello, I'm</p>
+                <h2 id="profile-name"
+                    class="text-6xl sm:text-7xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#4A90E2] to-[#72B9FF]">
+                    Amir Rezaiyan
+                </h2>
+                <h3 id="profile-title" class="text-3xl font-light text-gray-300 mb-6" data-i18n="intro_title">Backend Developer</h3>
+                <!-- Typed.js Animation Target (Strings are always EN) -->
+                <p class="text-2xl font-mono h-8">
+                    <span id="typed-output" class="text-yellow-400"></span>
+                </p>
+                <p id="profile-bio" class="mt-8 text-lg text-gray-400 max-w-xl mx-auto md:mx-0" data-i18n="intro_bio">
+                    Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in
+                    modern web frameworks, and database optimization.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. Metrics/Highlights Section -->
+        <section id="metrics" class="py-10">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="metrics_title">Performance Highlights</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+                <!-- Metric Card 1: Experience -->
+                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll">
+                    <p class="metric-value text-[#72B9FF]" data-i18n="metric_exp_value">+2 years</p>
+                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_exp_label">Backend Experience</p>
+                </div>
+
+                <!-- Metric Card 2: Uptime Improvement -->
+                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll" data-delay="0.1">
+                    <p class="metric-value text-[#5BC0BE]" data-i18n="metric_uptime_value">99.9%</p>
+                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_uptime_label">System Uptime</p>
+                </div>
+
+                <!-- Metric Card 3: Code Coverage -->
+                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll" data-delay="0.2">
+                    <p class="metric-value text-red-400" data-i18n="metric_coverage_value">85%</p>
+                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_coverage_label">Average Code Coverage</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="py-10">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="skills_title">Technical Skills</h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Skill Category: Languages -->
+                <div class="glass-card p-6 rounded-2xl animate-on-scroll">
+                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_languages">Languages</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category: Frameworks -->
+                <div class="glass-card p-6 rounded-2xl animate-on-scroll" data-delay="0.1">
+                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_frameworks">Frameworks</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">DRF</span>
+                        <span class="skill-tag">Asyncio</span>
+                        <span class="skill-tag">JWT</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category: Tools & Ops -->
+                <div class="glass-card p-6 rounded-2xl animate-on-scroll" data-delay="0.2">
+                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_tools_ops">Tools & Ops</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Celery</span>
+                        <span class="skill-tag">RabbitMQ</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Uvicorn</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Nginx</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Link Button (Dynamically updated) -->
+            <div class="text-center mt-12 animate-on-scroll" data-delay="0.3">
+                <a id="github-project-link" href="https://www.github.com/AmirRezaiyan" target="_blank"
+                    class="inline-block px-8 py-4 bg-[#4A90E2] text-white font-bold text-lg rounded-full shadow-lg hover:bg-[#72B9FF] transition duration-300 transform hover:scale-105"
+                    data-i18n="github_link_text">
+                    View my code on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- 4. Backend Architecture Diagram -->
+        <section id="architecture" class="py-10">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="arch_title">Backend Architecture Overview</h2>
+
+            <div class="glass-card p-6 sm:p-10 rounded-3xl animate-on-scroll">
+                <div id="arch-container"
+                    class="flex flex-col items-center space-y-8 md:space-y-0 md:flex-row md:justify-around text-center relative p-4">
+
+                    <!-- Node 1: Client -->
+                    <div id="node-client" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
+                        <div
+                            class="arch-node w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border-2 border-green-400 hover:bg-green-500/40">
+                            <span class="text-3xl">💻</span>
+                        </div>
+                        <p class="mt-2 text-lg font-semibold text-green-300" data-i18n="arch_node_client_name">Client</p>
+                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_client_tooltip">
+                            Web/Mobile App initiates the request (HTTP).
+                        </div>
+                    </div>
+
+                    <!-- Node 2: Backend (API) -->
+                    <div id="node-backend" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
+                        <div
+                            class="arch-node w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center border-2 border-blue-400 hover:bg-blue-500/40">
+                            <span class="text-3xl">⚙️</span>
+                        </div>
+                        <p class="mt-2 text-lg font-semibold text-blue-300" data-i18n="arch_node_backend_name">Backend</p>
+                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_backend_tooltip">
+                            Python (Django/FastAPI) handles business logic, security, and routing.
+                        </div>
+                    </div>
+
+                    <!-- Node 3: DB/Cache -->
+                    <div id="node-db" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
+                        <div
+                            class="arch-node w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center border-2 border-red-400 hover:bg-red-500/40">
+                            <span class="text-3xl">🗄️</span>
+                        </div>
+                        <p class="mt-2 text-lg font-semibold text-red-300" data-i18n="arch_node_db_name">DB/Cache</p>
+                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_db_tooltip">
+                            PostgreSQL for persistence, Redis for high-speed caching and sessions.
+                        </div>
+                    </div>
+
+                    <!-- Node 4: Worker/Queue -->
+                    <div id="node-worker" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
+                        <div
+                            class="arch-node w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center border-2 border-purple-400 hover:bg-purple-500/40">
+                            <span class="text-3xl">📦</span>
+                        </div>
+                        <p class="mt-2 text-lg font-semibold text-purple-300" data-i18n="arch_node_worker_name">Worker</p>
+                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_worker_tooltip">
+                            Celery/RabbitMQ handles async jobs like notifications and heavy processing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Technical Deep Dives -->
+        <section id="deep-dives" class="py-10">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="dives_title">Technical Deep Dives</h2>
+            <p class="text-center text-xl text-gray-400 mb-10 animate-on-scroll" data-i18n="dives_subtitle">
+                Detailed insights into challenging projects and solutions I have implemented.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Deep Dive Card 1: Caching Strategies -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between animate-on-scroll">
+                    <div>
+                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="dive1_title">Scaling with Caching Strategies</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">Redis Database Optimisation</span>
+                            <span class="skill-tag">Cache-Aside Pattern</span>
+                            <span class="skill-tag">TTL Management</span>
+                        </div>
+
+                        <p class="text-gray-300 mt-4 leading-relaxed" data-i18n="dive1_desc">
+                            I focus on implementing strategic caching using **Redis** (or Memcached) to handle high read
+                            traffic.
+                            This includes **cache-aside patterns** for database lookups and **time-to-live (TTL)**
+                            management
+                            for high-volatility data, significantly improving P95 latency and reducing database load.
+                        </p>
+                    </div>
+                    <p class="mt-4 text-sm font-semibold text-[#5BC0BE]" data-i18n="dive1_focus">Focus: Performance and Latency Reduction</p>
+                </div>
+
+                <!-- Deep Dive Card 2: Async Task Handling -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between animate-on-scroll"
+                    data-delay="0.1">
+                    <div>
+                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="dive2_title">Reliable Asynchronous Task Processing</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">Celery</span>
+                            <span class="skill-tag">RabbitMQ / Redis Broker</span>
+                            <span class="skill-tag">Retries and Error Handling</span>
+                        </div>
+                        <p class="text-gray-300 mt-4 leading-relaxed" data-i18n="dive2_desc">
+                            Implementing robust **Celery** workers backed by a message broker (like **RabbitMQ**) to
+                            offload
+                            expensive operations (e.g., image processing, email sending) from the main API thread. This
+                            ensures
+                            a fast user experience, prevents API timeouts, and utilizes features like **retries and error
+                            handling** for mission-critical jobs.
+                        </p>
+                    </div>
+                    <p class="mt-4 text-sm font-semibold text-[#5BC0BE]" data-i18n="dive2_focus">Focus: Scalability and System Reliability</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Experience Timeline Section -->
+        <section id="experience" class="py-10">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="exp_title">Professional Experience</h2>
+
+            <div class="timeline animate-on-scroll">
+
+                <!-- Job 1: Current Role (Junior/Mid Level) -->
+                <div class="timeline-container right">
+                    <div class="timeline-content glass-card p-6 rounded-xl">
+                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="exp1_title">Backend Developer</h3>
+                        <p class="text-xl font-semibold text-gray-300" data-i18n="exp1_company">Tech Solutions Co.</p>
+                        <p class="text-gray-500 mb-4" data-i18n="exp1_duration">2023 - Present</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li data-i18n="exp1_bullet1">Developed and maintained core API endpoints using **Django REST Framework** and
+                                **FastAPI**.</li>
+                            <li data-i18n="exp1_bullet2">Collaborated on architectural decisions for service scaling and database performance.</li>
+                            <li data-i18n="exp1_bullet3">Implemented unit and integration tests to ensure code quality and stability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 2: Previous Role (Initial Role/Internship) -->
+                <div class="timeline-container left">
+                    <div class="timeline-content glass-card p-6 rounded-xl">
+                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="exp2_title">Senior Python Developer</h3>
+                        <p class="text-xl font-semibold text-gray-300" data-i18n="exp2_company">Web Innovation Hub</p>
+                        <p class="text-gray-500 mb-4" data-i18n="exp2_duration">2022 - 2023</p>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li data-i18n="exp2_bullet1">Contributed to backend feature development and bug fixes under senior guidance.</li>
+                            <li data-i18n="exp2_bullet2">Gained hands-on experience with version control (**Git**) and deployment workflows.</li>
+                            <li data-i18n="exp2_bullet3">Wrote clean, documented code following **PEP 8** standards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 7. Contact Section -->
+        <section id="contact" class="py-10 mb-20">
+            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="contact_title">Get In Touch</h2>
+
+            <div class="glass-card p-6 sm:p-10 rounded-3xl animate-on-scroll">
+                <p class="text-center text-xl text-gray-400 mb-8" data-i18n="contact_text">
+                    Let's connect and discuss your next project. I'm always open to new challenges.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+
+                    <!-- GitHub Link -->
+                    <a id="contact-github-link" href="https://www.github.com/AmirRezaiyan" target="_blank"
+                        class="contact-item bg-gray-700 hover:bg-gray-600">
+                        <!-- SVG Icon for GitHub -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3.5 0 4.2-2.2 4.2-4.2 0-.3 0-.7-.1-1 1-.9 1.7-2.6.4-3.7-1-1.2-4.2-.7-5.5-.3a4.5 4.5 0 0 0-2.4 0c-1.3-.4-4.5-.9-5.5.3-1.3 1.1-.6 2.8.4 3.7-.1.3-.1.7-.1 1 0 2 0 4.2 4.2 4.2-.2.2-.4.7-.4 1.5v4" />
+                            <path
+                                d="M9 18c-3.1 0-5.8-.8-5.8-1.5 0-.7 2.7-1.5 5.8-1.5s5.8.8 5.8 1.5c0 .7-2.7 1.5-5.8 1.5Z" />
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" />
+                        </svg>
+                        <span id="github-text">GitHub</span>
+                    </a>
+
+                    <!-- Telegram Link -->
+                    <a id="contact-telegram-link" href="https://t.me/AmirRezaiyann" target="_blank"
+                        class="contact-item bg-[#0088CC] hover:bg-[#00A1F0]">
+                        <!-- SVG Icon for Telegram -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 8.44a1.76 1.76 0 0 0-1.76-1.76h-3.68l-6.88 4.76L3.68 6.68H2.4a.68.68 0 0 0-.68.68v9.44a.68.68 0 0 0 .68.68h1.28a1.76 1.76 0 0 0 1.76-1.76v-7.8l5.88 4.08 7.08-4.92v4.84a1.76 1.76 0 0 0 1.76 1.76h.68a.68.68 0 0 0 .68-.68V8.44Z" />
+                        </svg>
+                        <span id="telegram-text">Telegram</span>
+                    </a>
+
+                    <!-- Phone Number -->
+                    <a id="contact-phone-link" href="tel:09910803518"
+                        class="contact-item bg-[#5BC0BE] hover:bg-[#72B9FF]">
+                        <!-- SVG Icon for Phone -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.83 19.83 0 0 1-5.11-4.71c-.72-1.21-1.1-2.38-1.12-3.66a18.25 18.25 0 0 1 3.52-5.78l1.41-1.41a2 2 0 0 1 2.83 0l2.67 2.67a2 2 0 0 1 0 2.83l-1.07 1.07a1 1 0 0 0-.24 1.05c.57 1.48 1.42 2.76 2.45 3.8a10.42 10.42 0 0 0 3.32 2.69 1 1 0 0 0 1.05-.24l1.07-1.07a2 2 0 0 1 2.83 0l2.67 2.67a2 2 0 0 1 0 2.83Z" />
+                        </svg>
+                        <span id="phone-text">09910803518</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-gray-500 text-sm border-t border-white/5 mt-10">
+        &copy; <span id="current-year">2024</span> <span data-i18n="footer_copyright">Amir Rezaiyan. Designed with Tailwind CSS & GSAP.</span>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            /* ---------------------------
+               I18N: TRANSLATION DATA
+               --------------------------- */
+
+            // Full dictionary of all English and Persian strings used in the UI
+            const i18n = {
+                // Typed.js strings (Always static, in English)
+                'typed_strings_en': [
+                    "Python", "Django", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "RabbitMQ", "Git", "OOP", "HTML | CSS"
+                ],
+                
+                'page_title': {
+                    en: 'Amir Rezaiyan | Backend Developer Resume',
+                    fa: 'امیر رضائیان | رزومه توسعه‌دهنده بک‌اند'
+                },
+                'header_initials': {
+                    en: 'A.R.',
+                    fa: 'ا.ر.'
+                },
+                'nav_intro': { en: 'Intro', fa: 'معرفی' },
+                'nav_highlights': { en: 'Highlights', fa: 'دستاوردها' },
+                'nav_skills': { en: 'Skills', fa: 'مهارت‌ها' },
+                'nav_architecture': { en: 'Architecture', fa: 'معماری' },
+                'nav_deep_dives': { en: 'Deep Dives', fa: 'بررسی‌های فنی' },
+                'nav_experience': { en: 'Experience', fa: 'سوابق' },
+                'nav_contact': { en: 'Contact', fa: 'تماس' },
+                'intro_greeting': { en: "Hello, I'm", fa: 'سلام، من' },
+                'intro_title': { en: 'Backend Developer', fa: 'توسعه‌دهنده بک‌اند' },
+                'intro_bio': {
+                    en: 'Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in modern web frameworks, and database optimization.',
+                    fa: 'توسعه‌دهنده متعهد پایتون متخصص در سیستم‌های بک‌اند مقیاس‌پذیر، قوی و تمیز. دارای تخصص در فریمورک‌های وب مدرن و بهینه‌سازی پایگاه داده.'
+                },
+                'metrics_title': { en: 'Performance Highlights', fa: 'دستاورد‌های عملکردی' },
+                'metric_exp_value': { en: '+2 years', fa: '+۲ سال' },
+                'metric_exp_label': { en: 'Backend Experience', fa: 'تجربه بک‌اند' },
+                'metric_uptime_value': { en: '99.9%', fa: '۹۹.۹٪' },
+                'metric_uptime_label': { en: 'System Uptime', fa: 'پایداری سیستم' },
+                'metric_coverage_value': { en: '85%', fa: '۸۵٪' },
+                'metric_coverage_label': { en: 'Average Code Coverage', fa: 'پوشش کد متوسط' },
+                'skills_title': { en: 'Technical Skills', fa: 'مهارت‌های فنی' },
+                'skills_languages': { en: 'Languages', fa: 'زبان‌ها' },
+                'skills_frameworks': { en: 'Frameworks', fa: 'فریمورک‌ها' },
+                'skills_tools_ops': { en: 'Tools & Ops', fa: 'ابزارها و عملیات' },
+                'github_link_text': { en: 'View my code on GitHub', fa: 'مشاهده کد در گیت‌هاب' },
+                'arch_title': { en: 'Backend Architecture Overview', fa: 'مروری بر معماری بک‌اند' },
+                'arch_node_client_name': { en: 'Client', fa: 'کلاینت' },
+                'arch_node_client_tooltip': {
+                    en: 'Web/Mobile App initiates the request (HTTP).',
+                    fa: 'برنامه وب/موبایل درخواست را آغاز می‌کند (HTTP).'
+                },
+                'arch_node_backend_name': { en: 'Backend', fa: 'بک‌اند' },
+                'arch_node_backend_tooltip': {
+                    en: 'Python (Django/FastAPI) handles business logic, security, and routing.',
+                    fa: 'پایتون (Django/FastAPI) منطق تجاری، امنیت و مسیریابی را مدیریت می‌کند.'
+                },
+                'arch_node_db_name': { en: 'DB/Cache', fa: 'پایگاه داده/کش' },
+                'arch_node_db_tooltip': {
+                    en: 'PostgreSQL for persistence, Redis for high-speed caching and sessions.',
+                    fa: 'PostgreSQL برای پایداری، Redis برای کش سریع و سشن‌ها.'
+                },
+                'arch_node_worker_name': { en: 'Worker', fa: 'Worker' },
+                'arch_node_worker_tooltip': {
+                    en: 'Celery/RabbitMQ handles async jobs like notifications and heavy processing.',
+                    fa: 'Celery/RabbitMQ وظایف ناهمگام مانند اعلان‌ها و پردازش‌های سنگین را مدیریت می‌کند.'
+                },
+                'dives_title': { en: 'Technical Deep Dives', fa: 'بررسی‌های فنی عمیق' },
+                'dives_subtitle': {
+                    en: 'Detailed insights into challenging projects and solutions I have implemented.',
+                    fa: 'بینش‌های دقیق در مورد پروژه‌های چالش‌برانگیز و راه‌حل‌هایی که پیاده‌سازی کرده‌ام.'
+                },
+                'dive1_title': { en: 'Scaling with Caching Strategies', fa: 'مقیاس‌پذیری با استراتژی‌های کشینگ' },
+                'dive1_desc': {
+                    en: 'I focus on implementing strategic caching using **Redis** (or Memcached) to handle high read traffic. This includes **cache-aside patterns** for database lookups and **time-to-live (TTL)** management for high-volatility data, significantly improving P95 latency and reducing database load.',
+                    fa: 'تمرکز من بر پیاده‌سازی کشینگ استراتژیک با استفاده از **Redis** (یا Memcached) برای مدیریت ترافیک بالای خواندن است. این شامل **الگوهای cache-aside** برای جستجوهای پایگاه داده و مدیریت **زمان ماندگاری (TTL)** برای داده‌های با نوسان بالا است که تأخیر P95 را به طور قابل توجهی بهبود می‌بخشد و بار پایگاه داده را کاهش می‌دهد.'
+                },
+                'dive1_focus': { en: 'Focus: Performance and Latency Reduction', fa: 'تمرکز: عملکرد و کاهش تأخیر' },
+                'dive2_title': { en: 'Reliable Asynchronous Task Processing', fa: 'پردازش وظایف ناهمگام قابل اعتماد' },
+                'dive2_desc': {
+                    en: 'Implementing robust **Celery** workers backed by a message broker (like **RabbitMQ**) to offload expensive operations (e.g., image processing, email sending) from the main API thread. This ensures a fast user experience, prevents API timeouts, and utilizes features like **retries and error handling** for mission-critical jobs.',
+                    fa: 'پیاده‌سازی کارگران **Celery** قوی با پشتیبانی از یک کارگزار پیام (مانند **RabbitMQ**) برای انتقال عملیات پرهزینه (مانند پردازش تصویر، ارسال ایمیل) از رشته اصلی API. این کار تجربه کاربری سریع را تضمین می‌کند، از مهلت‌های زمانی API جلوگیری می‌نماید، و از ویژگی‌هایی مانند **تلاش مجدد و مدیریت خطا** برای وظایف حیاتی استفاده می‌کند.'
+                },
+                'dive2_focus': { en: 'Focus: Scalability and System Reliability', fa: 'تمرکز: مقیاس‌پذیری و قابلیت اطمینان سیستم' },
+                'exp_title': { en: 'Professional Experience', fa: 'سوابق شغلی' },
+                'exp1_title': { en: 'Backend Developer', fa: 'توسعه‌دهنده بک‌اند' },
+                'exp1_company': { en: 'Tech Solutions Co.', fa: 'شرکت راه‌حل‌های فناوری' },
+                'exp1_duration': { en: '2023 - Present', fa: '۱۴۰۲ - اکنون' },
+                'exp1_bullet1': {
+                    en: 'Developed and maintained core API endpoints using **Django REST Framework** and **FastAPI**.',
+                    fa: 'توسعه و نگهداری از اندپوینت‌های اصلی API با استفاده از **Django REST Framework** و **FastAPI**.'
+                },
+                'exp1_bullet2': {
+                    en: 'Collaborated on architectural decisions for service scaling and database performance.',
+                    fa: 'همکاری در تصمیمات معماری برای مقیاس‌بندی سرویس‌ها و عملکرد پایگاه داده.'
+                },
+                'exp1_bullet3': {
+                    en: 'Implemented unit and integration tests to ensure code quality and stability.',
+                    fa: 'پیاده‌سازی تست‌های واحد و یکپارچه‌سازی برای اطمینان از کیفیت و پایداری کد.'
+                },
+                'exp2_title': { en: 'Senior Python Developer', fa: 'توسعه‌دهنده پایتون (سطح ارشد)' },
+                'exp2_company': { en: 'Web Innovation Hub', fa: 'مرکز نوآوری وب' },
+                'exp2_duration': { en: '2022 - 2023', fa: '۱۴۰۱ - ۱۴۰۲' },
+                'exp2_bullet1': {
+                    en: 'Contributed to backend feature development and bug fixes under senior guidance.',
+                    fa: 'مشارکت در توسعه ویژگی‌های بک‌اند و رفع اشکال تحت هدایت تیم ارشد.'
+                },
+                'exp2_bullet2': {
+                    en: 'Gained hands-on experience with version control (**Git**) and deployment workflows.',
+                    fa: 'کسب تجربه عملی با کنترل نسخه (**Git**) و جریان‌های کاری استقرار.'
+                },
+                'exp2_bullet3': {
+                    en: 'Wrote clean, documented code following **PEP 8** standards.',
+                    fa: 'نوشتن کد تمیز و مستند مطابق با استانداردهای **PEP 8**.'
+                },
+                'contact_title': { en: 'Get In Touch', fa: 'در تماس باشید' },
+                'contact_text': {
+                    en: "Let's connect and discuss your next project. I'm always open to new challenges.",
+                    fa: 'بیایید ارتباط برقرار کنیم و درباره پروژه بعدی شما صحبت کنیم. من همیشه پذیرای چالش‌های جدید هستم.'
+                },
+                'footer_copyright': {
+                    en: 'Amir Rezaiyan. Designed with Tailwind CSS & GSAP.',
+                    fa: 'امیر رضائیان. طراحی شده با Tailwind CSS و GSAP.'
+                }
+            };
+
+            const LANG_KEY = 'userLang';
+            let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+            let typedInstance = null;
+            
+            // Strings for Typed.js (Always static, in English)
+            const TYPED_STRINGS = i18n.typed_strings_en; 
+
+
+            // Replaces Typed.js instance with new strings
+            function updateTypedJs() {
+                if (typedInstance) {
+                    typedInstance.destroy(); // Destroy previous instance
+                }
+                
+                typedInstance = new Typed('#typed-output', {
+                    strings: TYPED_STRINGS,
+                    typeSpeed: 50,
+                    backSpeed: 30,
+                    startDelay: 500,
+                    loop: true,
+                    shuffle: true,
+                });
+            }
+
+            /**
+             * Translates all elements with a data-i18n attribute on the page.
+             * Also updates the document's directionality (RTL/LTR) and font.
+             */
+            function translatePage(lang) {
+                // 1. Update HTML language and direction
+                const htmlEl = document.documentElement;
+                const bodyEl = document.body;
+                const toggleButton = document.getElementById('lang-toggle');
+                
+                htmlEl.lang = lang;
+                
+                if (lang === 'fa') {
+                    bodyEl.classList.add('rtl');
+                    bodyEl.dir = 'rtl';
+                    // Button shows the language to switch TO (English)
+                    toggleButton.textContent = 'English'; 
+                } else {
+                    bodyEl.classList.remove('rtl');
+                    bodyEl.dir = 'ltr';
+                    // Button shows the language to switch TO (Persian)
+                    toggleButton.textContent = 'فارسی'; 
+                }
+
+                // 2. Translate all elements
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    const translation = i18n[key];
+
+                    if (translation && translation[lang]) {
+                        // Check for raw HTML content (e.g., bullet points with bold text)
+                        if (translation[lang].includes('**')) {
+                            let text = translation[lang];
+                            // Replace **text** with <strong>text</strong>
+                            element.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        } else if (element.tagName === 'TITLE') {
+                            document.title = translation[lang];
+                        } else {
+                            element.textContent = translation[lang];
+                        }
+                    }
+                });
+
+                // 3. Update Typed.js strings (always uses EN strings)
+                updateTypedJs();
+                
+                // 4. Update local storage
+                localStorage.setItem(LANG_KEY, lang);
+            }
+
+            /**
+             * Toggles the language between English (en) and Persian (fa).
+             */
+            function toggleLanguage() {
+                currentLang = currentLang === 'en' ? 'fa' : 'en';
+                translatePage(currentLang);
+            }
+
+            /* ---------------------------
+               STATIC PROFILE & LINKS
+               --------------------------- */
+            const PROFILE = {
+                name: 'Amir Rezaiyan',
+                title: 'Backend Developer',
+                bio: 'Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in modern web frameworks, and database optimization.',
+                phoneNumber: '09910803518',
+                telegramId: 'AmirRezaiyann',
+                githubUrl: 'https://github.com/AmirRezaiyan',
+                profilePictureUrl: '/static/myprofile/profile.jpg' // Assuming a placeholder image is used or the user has one
+            };
+
+            function initializeAnimations() {
+                /* -------------------------------------
+                   GSAP Scroll Animations
+                   ------------------------------------- */
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Animate Introduction Section (Initial Load)
+                gsap.from("#introduction", {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    ease: "power3.out"
+                });
+
+                // Animate general sections/cards on scroll
+                document.querySelectorAll('.animate-on-scroll').forEach((card) => {
+                    // Check if ScrollTrigger is already associated with this element to prevent duplicates
+                    if (!ScrollTrigger.getById(card.id || card.dataset.delay)) {
+                        const delay = parseFloat(card.dataset.delay) || 0;
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                id: card.id || card.dataset.delay, // Use ID or delay as unique ID
+                                trigger: card,
+                                start: "top 85%",
+                                toggleActions: "play none none none", // Only run once when scrolling down
+                            },
+                            opacity: 0,
+                            y: 30,
+                            duration: 0.8,
+                            delay: delay,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+
+                // Force a ScrollTrigger refresh after all elements are visible/loaded
+                setTimeout(() => {
+                    if (ScrollTrigger) {
+                        ScrollTrigger.refresh(true);
+                        console.log("ScrollTrigger refreshed after content load.");
+                    }
+                }, 100);
+            }
+
+            function applyProfile(data) {
+                // Intro Texts (These are hardcoded and not translated, so only need to be set once)
+                document.getElementById('profile-name').textContent = data.name || 'Amir Rezaiyan';
+                // Title and Bio are translated via data-i18n, so only need initial load if not translated
+                
+                const picContainer = document.getElementById('profile-picture-container');
+                const defaultSvg = document.getElementById('default-profile-svg');
+                defaultSvg.classList.remove('hidden');
+
+                if (data.profilePictureUrl) {
+                    const img = new Image();
+                    img.src = data.profilePictureUrl;
+                    img.alt = data.name;
+                    img.classList.add('w-full', 'h-full', 'object-cover', 'rounded-full');
+
+                    // If the image loads successfully, hide SVG and append image
+                    img.onload = () => {
+                        defaultSvg.classList.add('hidden');
+                        picContainer.innerHTML = '';
+                        picContainer.appendChild(img);
+                    };
+
+                    // If the image fails to load, show SVG
+                    img.onerror = () => {
+                        defaultSvg.classList.remove('hidden');
+                        console.error('Profile picture failed to load. Showing default SVG.');
+                    };
+                }
+
+                updateContactLinks(data);
+            }
+
+            function updateContactLinks(data) {
+                const gh = data.githubUrl || '#';
+                document.getElementById('github-project-link').href = gh;
+                document.getElementById('contact-github-link').href = gh;
+
+                const phoneTextEl = document.getElementById('phone-text');
+                const phoneLinkEl = document.getElementById('contact-phone-link');
+                phoneTextEl.textContent = data.phoneNumber || 'N/A';
+                phoneLinkEl.href = data.phoneNumber ? `tel:${data.phoneNumber.replace(/\s/g, '')}` : '#';
+
+                const tgTextEl = document.getElementById('telegram-text');
+                const tgLinkEl = document.getElementById('contact-telegram-link');
+                tgTextEl.textContent = data.telegramId || 'Telegram';
+                tgLinkEl.href = data.telegramId ? `https://t.me/${data.telegramId.replace('@', '')}` : '#';
+            }
+
+
+            // 1. Set up event listener for the language toggle button
+            document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+
+            // 2. Apply static profile details (text and links)
+            applyProfile(PROFILE);
+
+            // 3. Translate page immediately based on saved preference (or default 'en')
+            translatePage(currentLang);
+
+            // 4. Initialize ALL animations
+            initializeAnimations();
+
+        });
+    </script>
+</body>
+
+</html>
