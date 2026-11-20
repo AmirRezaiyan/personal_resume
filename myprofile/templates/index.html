@@ -1,1063 +1,717 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page_title">Amir Rezaiyan | Backend Developer Resume</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Load Google Fonts (Inter) for LTR/English -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
-    <!-- Load Vazirmatn Font (Reliable Persian Font via Google Fonts CDN) -->
-    <!-- این لینک بسیار قابل اطمینان‌تر از CDN مبتنی بر گیت‌هاب است و باید مشکل فونت را حل کند -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
-    
-    <!-- Load Typed.js for typing animation -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <!-- Load GSAP & ScrollTrigger for smooth animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <style>
-        /* General Setup & Custom Glassmorphism Styles */
-        body {
-            /* Default Font: Inter for LTR */
-            font-family: 'Inter', sans-serif;
-            background: #0D1117;
-            /* GitHub Dark Mode background */
-            color: #E6EDF3;
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: direction 0.3s, text-align 0.3s;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090e0c">
+  <meta name="description" content="Amir Rezaiyan — Backend Engineer focused on Python, Django, APIs, and reliable data-driven applications.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Amir Rezaiyan | Backend Engineer">
+  <meta property="og:description" content="Backend engineering with Python, Django, REST APIs, PostgreSQL, and Redis.">
+  <title>Amir Rezaiyan — Backend Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js-enabled');</script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090e0c;
+      --bg-soft: #0d1511;
+      --surface: rgba(17, 27, 21, .78);
+      --surface-strong: #111b15;
+      --line: rgba(195, 230, 207, .12);
+      --line-strong: rgba(195, 230, 207, .22);
+      --text: #edf5ef;
+      --muted: #9aaa9f;
+      --faint: #65766c;
+      --accent: #9be3b1;
+      --accent-strong: #61c989;
+      --accent-dim: rgba(115, 213, 151, .12);
+      --mono: "DM Mono", monospace;
+      --sans: "DM Sans", sans-serif;
+      --radius: 22px;
+      --max: 1160px;
+    }
 
-        /* IranSans/Vazirmatn Font Application (Applied only when the body has the 'rtl' class) */
-        body.rtl {
-            direction: rtl;
-            text-align: right;
-            /* *** تغییر مهم: استفاده از Vazirmatn به عنوان فونت اصلی برای تضمین بارگذاری از CDN مطمئن گوگل *** */
-            font-family: 'Vazirmatn', 'IranSans', 'Inter', sans-serif !important; 
-        }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; background: var(--bg); }
+    body {
+      margin: 0; min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--text);
+      font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(ellipse at 14% 8%, rgba(67, 143, 92, .13), transparent 34%),
+                        radial-gradient(ellipse at 88% 45%, rgba(46, 117, 82, .08), transparent 34%);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .22;
+      background-image: linear-gradient(rgba(177, 216, 190, .035) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(177, 216, 190, .035) 1px, transparent 1px);
+      background-size: 54px 54px; mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    ::selection { background: rgba(130, 220, 158, .28); color: #fff; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .mono { font-family: var(--mono); }
+    .code-window, .profile-top, .code-label, .tech-orbit, .experience-date, .experience-tags { direction: ltr; text-align: left; }
+    .muted { color: var(--muted); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); font: 500 11px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent-strong); }
+    .section { padding: 112px 0; position: relative; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 42px; }
+    .section-heading h2 { margin: 12px 0 0; max-width: 650px; font-size: clamp(32px, 4vw, 49px); line-height: 1.12; letter-spacing: -.045em; }
+    .section-heading p { max-width: 390px; margin: 0 0 4px; color: var(--muted); font-size: 14px; }
+    .accent { color: var(--accent); }
+    .surface { border: 1px solid var(--line); background: linear-gradient(145deg, rgba(22, 34, 27, .86), rgba(12, 20, 15, .76)); border-radius: var(--radius); }
 
-        /* Override general center alignment for RTL sections like Bio and Contact Text */
-        body.rtl .text-center {
-            text-align: center !important;
-        }
+    /* Navigation */
+    .site-header { position: fixed; z-index: 50; inset: 0 0 auto; padding: 16px 0; transition: background .25s, border-color .25s, padding .25s; border-bottom: 1px solid transparent; }
+    .site-header.scrolled { padding: 10px 0; background: rgba(8, 13, 10, .84); border-color: var(--line); backdrop-filter: blur(18px); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.04em; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 37px; height: 37px; border: 1px solid rgba(155, 227, 177, .45); border-radius: 11px; color: var(--accent); background: var(--accent-dim); font: 500 13px var(--mono); }
+    .brand-name { font-size: 14px; }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 30px); margin-inline-start: auto; }
+    .nav-links a { color: #aab8ae; font-size: 12px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-btn, .menu-btn { border: 1px solid var(--line-strong); color: var(--text); background: rgba(255,255,255,.025); border-radius: 10px; cursor: pointer; transition: .2s; }
+    .lang-btn { padding: 8px 12px; min-width: 54px; font: 500 11px var(--mono); }
+    .lang-btn:hover, .menu-btn:hover { border-color: var(--accent-strong); color: var(--accent); }
+    .menu-btn { display: none; width: 38px; height: 38px; place-items: center; }
+    .menu-btn svg { width: 18px; height: 18px; }
 
-        /* Glassmorphism Effect Class */
-        .glass-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            /* Semi-transparent white */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    /* Hero */
+    .hero { min-height: 760px; display: flex; align-items: center; padding: 150px 0 86px; position: relative; }
+    #particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .55; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(330px, .88fr); align-items: center; gap: clamp(50px, 8vw, 108px); }
+    .hero-copy { max-width: 690px; }
+    .availability { display: inline-flex; align-items: center; gap: 9px; padding: 7px 11px; margin-bottom: 27px; border: 1px solid var(--line); border-radius: 99px; color: #b6c7bb; background: rgba(17, 31, 22, .62); font: 11px var(--mono); }
+    .availability-dot { width: 7px; height: 7px; border-radius: 50%; background: #7cda9b; box-shadow: 0 0 0 4px rgba(124, 218, 155, .1); }
+    .hero h1 { margin: 18px 0 18px; font-size: clamp(48px, 7.3vw, 88px); line-height: .99; letter-spacing: -.075em; font-weight: 800; }
+    .hero h1 .name-line { display: block; color: var(--text); }
+    .hero h1 .role-line { display: block; margin-top: 13px; color: var(--accent); }
+    .hero-lead { max-width: 600px; color: #a8b8ad; font-size: clamp(15px, 1.45vw, 17px); line-height: 1.9; margin: 25px 0 27px; }
+    .typing-line { display: flex; align-items: center; gap: 10px; min-height: 25px; color: #80968a; font: 12px var(--mono); }
+    .typing-value { color: var(--accent); min-width: 180px; }
+    .typing-caret { display: inline-block; width: 1px; height: 15px; background: var(--accent); margin-inline-start: 2px; vertical-align: -3px; animation: caretBlink .9s steps(2, start) infinite; }
+    @keyframes caretBlink { to { visibility: hidden; } }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 47px; padding: 0 18px; border-radius: 12px; border: 1px solid transparent; font-size: 12px; font-weight: 700; transition: transform .2s, box-shadow .2s, background .2s, border-color .2s; }
+    .button:hover { transform: translateY(-3px); }
+    .button svg { width: 15px; height: 15px; }
+    .button-primary { color: #07110a; background: var(--accent); box-shadow: 0 8px 26px rgba(97, 201, 137, .13); }
+    .button-primary:hover { background: #b4f0c4; box-shadow: 0 12px 32px rgba(97, 201, 137, .22); }
+    .button-secondary { color: var(--text); border-color: var(--line-strong); background: rgba(255,255,255,.025); }
+    .button-secondary:hover { border-color: rgba(155, 227, 177, .6); background: var(--accent-dim); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 39px; color: #788b7f; font: 10px var(--mono); }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta svg { width: 13px; height: 13px; color: var(--accent-strong); }
+    .hero-visual { position: relative; min-height: 450px; display: grid; place-items: center; }
+    .visual-glow { position: absolute; width: 330px; height: 330px; border-radius: 50%; background: rgba(81, 183, 119, .12); filter: blur(65px); animation: glowPulse 6s ease-in-out infinite; }
+    @keyframes glowPulse { 50% { transform: scale(1.14); opacity: .65; } }
+    .profile-card { position: relative; width: min(100%, 405px); padding: 17px; overflow: hidden; transform: rotate(1.5deg); box-shadow: 0 34px 100px rgba(0,0,0,.33); }
+    .profile-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(155,227,177,.65), transparent); }
+    .profile-top { display: flex; justify-content: space-between; align-items: center; padding: 2px 3px 16px; color: #7f9186; font: 10px var(--mono); }
+    .window-dots { display: flex; gap: 5px; }
+    .window-dots i { width: 6px; height: 6px; display: block; border-radius: 50%; background: #435449; }
+    .profile-inner { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: rgba(5, 11, 7, .55); }
+    .profile-person { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .avatar { width: 66px; height: 66px; flex: 0 0 auto; border-radius: 17px; overflow: hidden; display: grid; place-items: center; border: 1px solid rgba(155,227,177,.4); background: linear-gradient(140deg, #244632, #101c14); color: var(--accent); font: 700 19px var(--mono); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-person strong { display: block; font-size: 15px; letter-spacing: -.03em; }
+    .profile-person small { display: block; margin-top: 4px; color: #84988b; font: 10px var(--mono); }
+    .code-label { margin: 19px 0 10px; color: #71867a; font: 10px var(--mono); }
+    .code-window { padding: 15px; border: 1px solid rgba(155,227,177,.12); border-radius: 12px; background: #0a120d; font: 11px/2 var(--mono); }
+    .code-window .line-no { display: inline-block; width: 23px; color: #53675a; user-select: none; }
+    .code-window .key { color: #9be3b1; }
+    .code-window .value { color: #d5c28d; }
+    .code-window .comment { color: #657b6b; }
+    .tech-orbit { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .tech-orbit span { padding: 5px 8px; border-radius: 7px; border: 1px solid var(--line); color: #9fb0a4; font: 9px var(--mono); }
+    .floating-note { position: absolute; right: -18px; bottom: 24px; padding: 12px 15px; border: 1px solid var(--line-strong); border-radius: 13px; background: rgba(12, 22, 15, .94); box-shadow: 0 15px 40px rgba(0,0,0,.25); transform: rotate(-3deg); }
+    .floating-note small { display: block; color: #7e9184; font: 9px var(--mono); }
+    .floating-note strong { display: block; margin-top: 3px; color: var(--accent); font: 700 19px var(--mono); }
 
-        .glass-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-        }
+    /* Experience metric strip */
+    .metrics-wrap { position: relative; z-index: 2; margin-top: -1px; }
+    .metrics { display: grid; grid-template-columns: 1.1fr 1fr 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: rgba(14, 23, 17, .83); }
+    .metric { min-height: 104px; display: flex; align-items: center; gap: 16px; padding: 22px 27px; border-inline-end: 1px solid var(--line); }
+    .metric:last-child { border: 0; }
+    .metric-number { color: var(--accent); font: 500 31px var(--mono); letter-spacing: -.08em; white-space: nowrap; }
+    .metric-label { color: #9aa99e; font-size: 11px; line-height: 1.5; }
+    .metric-label b { display: block; margin-bottom: 3px; color: var(--text); font-size: 12px; }
 
-        /* Responsive Architecture Diagram Styling (SVG - Keeping node styles) */
-        .arch-node {
-            transition: all 0.3s ease;
-        }
+    /* About */
+    .about-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 70px; align-items: start; }
+    .about-intro { position: sticky; top: 125px; }
+    .about-intro h2 { margin: 13px 0 20px; font-size: clamp(34px, 4vw, 48px); line-height: 1.12; letter-spacing: -.05em; }
+    .about-intro p { color: var(--muted); font-size: 14px; line-height: 2; }
+    .about-content { display: grid; gap: 13px; }
+    .focus-card { display: grid; grid-template-columns: 49px 1fr; gap: 18px; padding: 23px; border: 1px solid var(--line); border-radius: 17px; background: rgba(17,27,21,.55); transition: border-color .25s, transform .25s, background .25s; }
+    .focus-card:hover { transform: translateX(-4px); border-color: rgba(155,227,177,.35); background: rgba(20,35,25,.75); }
+    .focus-icon { width: 45px; height: 45px; display: grid; place-items: center; border: 1px solid rgba(155,227,177,.2); border-radius: 13px; color: var(--accent); background: var(--accent-dim); }
+    .focus-icon svg { width: 20px; height: 20px; }
+    .focus-card h3 { margin: 0 0 6px; font-size: 15px; }
+    .focus-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
 
-        .arch-node-container:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
+    /* Skills */
+    .skills-section { background: linear-gradient(180deg, transparent, rgba(17,31,21,.34), transparent); }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .skill-group { min-height: 190px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: rgba(15,24,18,.72); transition: transform .25s, border-color .25s; }
+    .skill-group:hover { transform: translateY(-4px); border-color: rgba(155,227,177,.32); }
+    .skill-head { display: flex; align-items: center; gap: 11px; margin-bottom: 20px; }
+    .skill-index { color: var(--accent-strong); font: 11px var(--mono); }
+    .skill-head h3 { margin: 0; font-size: 14px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tags span { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(193,222,201,.13); border-radius: 8px; color: #b5c4b9; background: rgba(255,255,255,.018); font: 10px var(--mono); transition: color .2s, border-color .2s, background .2s; }
+    .skill-tags span:hover { color: var(--accent); border-color: rgba(155,227,177,.38); background: var(--accent-dim); }
 
-        .tooltip {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s, visibility 0.3s;
-            pointer-events: none;
-            z-index: 20;
-        }
+    /* Experience */
+    .experience-list { display: grid; gap: 15px; position: relative; }
+    .experience-card { display: grid; grid-template-columns: 205px 1fr; gap: 35px; padding: 27px 29px; border: 1px solid var(--line); border-radius: 18px; background: rgba(15,24,18,.68); transition: border-color .25s, transform .25s; }
+    .experience-card:hover { transform: translateY(-3px); border-color: rgba(155,227,177,.32); }
+    .experience-date { color: var(--accent); font: 11px/1.8 var(--mono); }
+    .experience-type { display: block; margin-top: 8px; color: #72867a; font-size: 10px; }
+    .experience-main h3 { margin: 0; font-size: 19px; letter-spacing: -.025em; }
+    .experience-company { margin: 4px 0 12px; color: #9eafa3; font-size: 12px; }
+    .experience-main p:last-child { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+    .experience-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .experience-tags span { color: #8da396; font: 9px var(--mono); }
+    .experience-tags span + span::before { content: "·"; padding-inline-end: 7px; color: var(--accent-strong); }
 
-        /* Style for Typed.js cursor */
-        .typed-cursor {
-            opacity: 1;
-            -webkit-animation: blink 0.7s infinite;
-            -moz-animation: blink 0.7s infinite;
-            animation: blink 0.7s infinite;
-            font-weight: 300;
-        }
+    /* Approach */
+    .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .approach-card { min-height: 220px; padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(150deg, rgba(20,33,24,.75), rgba(12,19,14,.7)); }
+    .approach-number { color: var(--accent-strong); font: 11px var(--mono); }
+    .approach-card h3 { margin: 28px 0 10px; font-size: 17px; }
+    .approach-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
 
-        @keyframes blink {
+    /* Contact */
+    .contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 30px; padding: clamp(28px, 5vw, 54px); border: 1px solid rgba(155,227,177,.22); border-radius: 24px; background: radial-gradient(circle at 90% 10%, rgba(95,192,128,.14), transparent 38%), linear-gradient(135deg, #13251a, #0e1711 72%); }
+    .contact-panel::after { content: ""; position: absolute; width: 250px; height: 250px; right: 18%; bottom: -190px; border: 1px solid rgba(155,227,177,.13); border-radius: 50%; box-shadow: 0 0 0 28px rgba(155,227,177,.025), 0 0 0 58px rgba(155,227,177,.02); }
+    .contact-panel h2 { position: relative; z-index: 1; max-width: 620px; margin: 12px 0; font-size: clamp(32px, 4.5vw, 53px); line-height: 1.1; letter-spacing: -.05em; }
+    .contact-panel p { position: relative; z-index: 1; max-width: 550px; margin: 0; color: #a3b5a8; font-size: 13px; }
+    .contact-actions { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 10px; min-width: 170px; }
+    .contact-actions .button { width: 100%; }
+    .social-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+    .social-link { display: inline-flex; align-items: center; gap: 8px; color: #a5b6aa; font: 10px var(--mono); transition: color .2s; }
+    .social-link:hover { color: var(--accent); }
+    .social-link svg { width: 14px; height: 14px; }
+    .footer { padding: 25px 0 34px; color: #647469; font: 10px var(--mono); }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding-top: 23px; }
 
-            0%,
-            100% {
-                opacity: 1;
-            }
+    /* Reveal and pointer effects */
+    .reveal { opacity: 1; transform: none; }
+    .js-enabled .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .js-enabled .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .js-enabled .reveal[data-delay="1"] { transition-delay: .1s; }
+    .js-enabled .reveal[data-delay="2"] { transition-delay: .2s; }
+    .js-enabled .reveal[data-delay="3"] { transition-delay: .3s; }
+    .pointer-glow { position: fixed; z-index: 0; width: 340px; height: 340px; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(89,174,117,.055), transparent 68%); transform: translate(-50%,-50%); transition: opacity .3s; }
+    body.pointer-active .pointer-glow { opacity: 1; }
 
-            50% {
-                opacity: 0;
-            }
-        }
+    /* RTL */
+    html[dir="rtl"] body { font-family: "Vazirmatn", var(--sans); }
+    html[dir="rtl"] .hero h1 { letter-spacing: -.035em; line-height: 1.25; }
+    html[dir="rtl"] .hero-lead, html[dir="rtl"] .section-heading p, html[dir="rtl"] .about-intro p,
+    html[dir="rtl"] .focus-card p, html[dir="rtl"] .experience-main p, html[dir="rtl"] .contact-panel p { line-height: 2.05; }
+    html[dir="rtl"] .floating-note { right: auto; left: -18px; }
+    html[dir="rtl"] .focus-card:hover { transform: translateX(4px); }
+    html[dir="rtl"] .contact-panel::after { right: auto; left: 18%; }
+    html[dir="rtl"] .typing-line { font-family: var(--mono); }
+    html[dir="rtl"] .metric-number { letter-spacing: -.04em; }
 
-        /* Ensure smooth scroll for navigation/sections */
-        html {
-            scroll-behavior: smooth;
-        }
-        h3 {
-            padding: 10px;
-        }
-        /* Utility classes for dynamic content */
-        .default-profile-icon {
-            opacity: 0.8;
-            fill: #E6EDF3;
-        }
-
-        /* Metric Value Styling (Larger to match site scale) */
-        .metric-value {
-            font-size: 4rem;
-            line-height: 1;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Utility styles for tags and contact buttons */
-        .skill-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #5BC0BE;
-            background-color: rgba(91, 192, 190, 0.1);
-            border-radius: 9999px;
-            border: 1px solid rgba(91, 192, 190, 0.3);
-            transition: background-color 0.2s, transform 0.2s;
-        }
-
-        .skill-tag:hover {
-            background-color: rgba(91, 192, 190, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            color: white;
-            font-weight: 700;
-            border-radius: 9999px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            min-width: 250px;
-            justify-content: center;
-        }
-
-        .contact-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Timeline Styling - LTR Default */
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: rgba(91, 192, 190, 0.3);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-
-        .timeline-container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: #5BC0BE;
-            border: 4px solid #4A90E2;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .left {
-            left: 0;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid rgba(255, 255, 255, 0.1);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
-        }
-
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 22px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid rgba(255, 255, 255, 0.1);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
-        }
-
-        .right::after {
-            left: -10px;
-            right: unset;
-        }
-
-        /* Timeline Styling - RTL Overrides */
-        body.rtl .timeline::after {
-            right: 50%;
-            left: unset;
-            margin-right: -2px;
-        }
-
-        body.rtl .timeline-container {
-            text-align: right;
-        }
-
-        body.rtl .left {
-            right: 50%;
-            left: unset;
-        }
-
-        body.rtl .right {
-            left: 0;
-            right: unset;
-        }
-
-        body.rtl .timeline-container::after {
-            right: unset;
-            left: 30px;
-        }
-
-        body.rtl .left::after {
-            right: unset;
-            left: 30px;
-        }
-
-        body.rtl .right::after {
-            right: unset;
-            left: 30px;
-        }
-
-        body.rtl .left::before {
-            right: unset;
-            left: 30px;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
-        }
-
-        body.rtl .right::before {
-            left: unset;
-            right: 30px;
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
-        }
-
-        /* Media queries for responsiveness */
-        @media screen and (max-width: 768px) {
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-container {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-container::before {
-                left: 60px;
-                border: medium solid white;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent white transparent transparent;
-            }
-
-            .left::after,
-            .right::after {
-                left: 21px;
-            }
-
-            .right {
-                left: 0%;
-            }
-
-            .left::before,
-            .right::before {
-                display: none;
-            }
-
-            .timeline-content {
-                text-align: left;
-            }
-
-            /* Responsive RTL for timeline */
-            body.rtl .timeline::after {
-                right: 31px;
-                left: unset;
-            }
-
-            body.rtl .timeline-container {
-                padding-right: 70px;
-                padding-left: 25px;
-                text-align: right;
-            }
-
-            body.rtl .left::after,
-            body.rtl .right::after {
-                right: 21px;
-                left: unset;
-            }
-
-            body.rtl .right {
-                right: 0%;
-                left: unset;
-            }
-
-            body.rtl .left {
-                right: 0%;
-                left: unset;
-            }
-
-            body.rtl .timeline-content {
-                text-align: right;
-            }
-
-            /* Adjust text alignment for mobile in RTL */
-            body.rtl .md\:text-left {
-                text-align: right;
-            }
-        }
-    </style>
+    @media (max-width: 900px) {
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 11px; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(285px, .8fr); gap: 35px; }
+      .about-grid { gap: 38px; }
+      .experience-card { grid-template-columns: 165px 1fr; gap: 25px; }
+    }
+    @media (max-width: 740px) {
+      .container { width: min(100% - 36px, var(--max)); }
+      .site-header { padding: 11px 0; }
+      .menu-btn { display: grid; }
+      .nav-row { position: relative; }
+      .nav-links { display: none; position: absolute; top: calc(100% + 13px); inset-inline: 0; padding: 13px; border: 1px solid var(--line-strong); border-radius: 15px; background: rgba(9,16,11,.97); backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+      .nav-links.open { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+      .nav-links a { padding: 11px 10px; border-radius: 8px; font-size: 12px; }
+      .nav-links a:hover { background: var(--accent-dim); }
+      .hero { min-height: unset; padding: 125px 0 60px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 45px; }
+      .hero-copy { max-width: 100%; }
+      .hero h1 { font-size: clamp(49px, 12vw, 76px); }
+      .hero-visual { min-height: 390px; }
+      .profile-card { max-width: 390px; }
+      .floating-note { right: max(0px, calc((100% - 390px)/2 - 10px)); }
+      html[dir="rtl"] .floating-note { right: auto; left: max(0px, calc((100% - 390px)/2 - 10px)); }
+      .metrics { grid-template-columns: 1fr; }
+      .metric { min-height: 82px; padding: 16px 21px; border-inline-end: 0; border-bottom: 1px solid var(--line); }
+      .metric:last-child { border-bottom: 0; }
+      .section { padding: 78px 0; }
+      .section-heading { display: block; margin-bottom: 28px; }
+      .section-heading p { margin-top: 14px; }
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .about-intro { position: static; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .experience-card { grid-template-columns: 1fr; gap: 10px; padding: 22px; }
+      .experience-date { display: flex; align-items: baseline; gap: 12px; }
+      .experience-type { display: inline; margin-top: 0; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .approach-card { min-height: 180px; }
+      .approach-card h3 { margin-top: 18px; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .contact-actions { flex-direction: row; flex-wrap: wrap; }
+      .contact-actions .button { width: auto; }
+      .footer-row { flex-direction: column; gap: 7px; }
+    }
+    @media (max-width: 420px) {
+      .brand-name { font-size: 12px; }
+      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+      .hero-actions .button { padding-inline: 10px; font-size: 11px; }
+      .hero-meta { gap: 12px; }
+      .profile-inner { padding: 15px; }
+      .profile-card { padding: 12px; }
+      .floating-note { bottom: 8px; }
+      .social-row { display: grid; grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .js-enabled .reveal { opacity: 1; transform: none; }
+      #particle-canvas, .pointer-glow { display: none; }
+    }
+  </style>
 </head>
+<body>
+  <div class="pointer-glow" id="pointer-glow" aria-hidden="true"></div>
 
-<body class="bg-[#0D1117] min-h-screen p-4 sm:p-8">
+  <header class="site-header" id="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="#home" aria-label="Amir Rezaiyan home">
+        <span class="brand-mark">AR</span><span class="brand-name">AMIR REZAIYAN</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#experience" data-i18n="nav_experience">Experience</a>
+        <a href="#approach" data-i18n="nav_approach">Approach</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang-btn" id="lang-toggle" type="button" aria-label="Switch language">FA</button>
+        <button class="menu-btn" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <!-- Header / Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 py-4 glass-card border-b border-white/10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
-            <!-- Left Side: Initials & Logo -->
-            <h1 class="text-2xl font-bold text-[#5BC0BE] tracking-wider" data-i18n="header_initials">A.R.</h1>
-
-            <!-- Right Side: Navigation & Language Switcher -->
-            <div class="flex items-center space-x-6">
-                <!-- Navigation Links -->
-                <nav class="hidden md:flex space-x-6 text-gray-300">
-                    <a href="#introduction" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_intro">Intro</a>
-                    <a href="#metrics" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_highlights">Highlights</a>
-                    <a href="#skills" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_skills">Skills</a>
-                    <a href="#architecture" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_architecture">Architecture</a>
-                    <a href="#deep-dives" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_deep_dives">Deep Dives</a>
-                    <a href="#experience" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_experience">Experience</a>
-                    <a href="#contact" class="hover:text-[#4A90E2] transition duration-200" data-i18n="nav_contact">Contact</a>
-                </nav>
-
-                <!-- Language Switcher Button: Text updated dynamically in JS -->
-                <button id="lang-toggle"
-                    class="p-2 w-24 bg-[#4A90E2] text-white font-bold rounded-full shadow-lg hover:bg-[#72B9FF] transition duration-300 text-sm">
-                    FA / EN
-                </button>
-            </div>
+  <main>
+    <section class="hero" id="home">
+      <canvas id="particle-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="availability reveal"><span class="availability-dot"></span><span data-i18n="hero_status">BACKEND ENGINEERING · PYTHON ECOSYSTEM</span></div>
+          <div class="eyebrow reveal" data-delay="1" data-i18n="hero_eyebrow">HELLO, I'M AMIR</div>
+          <h1 class="reveal" data-delay="1">
+            <span class="name-line">Amir Rezaiyan</span>
+            <span class="role-line" data-i18n="hero_title">Backend Engineer.</span>
+          </h1>
+          <p class="hero-lead reveal" data-delay="2" data-i18n="hero_bio">I build backend applications and APIs with Python, focusing on clear architecture, reliable data flows, and maintainable code.</p>
+          <div class="typing-line reveal" data-delay="2"><span data-i18n="hero_working_with">WORKING WITH</span><span class="typing-value" id="typing-value">Python</span><span class="typing-caret" aria-hidden="true"></span></div>
+          <div class="hero-actions reveal" data-delay="3">
+            <a class="button button-primary" href="#contact"><span data-i18n="hero_cta_contact">Get in touch</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            <a class="button button-secondary" href="https://github.com/AmirRezaiyan" target="_blank" rel="noopener noreferrer"><span data-i18n="hero_cta_github">Explore GitHub</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .1.7 2.04 3.77 1.47.1-.72.4-1.22.7-1.5-2.48-.28-5.08-1.24-5.08-5.5 0-1.22.44-2.22 1.16-3-.12-.28-.5-1.42.11-2.96 0 0 .95-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.1-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.16 1.78 1.16 3 0 4.27-2.6 5.21-5.09 5.49.4.35.75 1.03.75 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg></a>
+          </div>
+          <div class="hero-meta reveal" data-delay="3">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="hero_focus">Backend-focused development</span></span>
+          </div>
         </div>
-    </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto pt-24 space-y-24">
-
-        <!-- 1. Introduction Section -->
-        <section id="introduction" class="grid md:grid-cols-3 gap-8 items-center p-6 sm:p-10 glass-card rounded-3xl">
-            <!-- Left: Profile Image -->
-            <div class="col-span-3 md:col-span-1 flex justify-center md:justify-start">
-                <div
-                    class="w-48 h-48 rounded-full bg-gray-700 p-2 ring-4 ring-[#4A90E2] shadow-2xl overflow-hidden relative">
-                    <!-- Container for Profile Image (Image or SVG) -->
-                    <div id="profile-picture-container" class="w-full h-full flex items-center justify-center">
-                        <!-- Default SVG Placeholder (Initially Visible) -->
-                        <svg id="default-profile-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            fill="currentColor" class="w-full h-full p-6 default-profile-icon">
-                            <path fill-rule="evenodd"
-                                d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.61-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
+        <div class="hero-visual reveal" data-delay="2" aria-label="Backend engineering profile card">
+          <div class="visual-glow"></div>
+          <div class="profile-card surface">
+            <div class="profile-top"><span class="window-dots"><i></i><i></i><i></i></span><span>backend.profile</span></div>
+            <div class="profile-inner">
+              <div class="profile-person">
+                <div class="avatar" id="avatar-wrap"><img src="/static/myprofile/profile.jpg" alt="Portrait of Amir Rezaiyan" onerror="this.remove(); document.getElementById('avatar-wrap').textContent='AR';"></div>
+                <div><strong>Amir Rezaiyan</strong><small>BACKEND ENGINEER</small></div>
+              </div>
+              <div class="code-label">// engineering profile</div>
+              <div class="code-window" aria-label="A code-styled summary of backend technologies">
+                <div><span class="line-no">01</span><span class="key">const</span> focus = <span class="value">"Backend"</span>;</div>
+                <div><span class="line-no">02</span><span class="key">const</span> language = <span class="value">"Python"</span>;</div>
+                <div><span class="line-no">03</span><span class="key">const</span> framework = <span class="value">["Django", "DRF"]</span>;</div>
+                <div><span class="line-no">04</span><span class="key">const</span> data = <span class="value">["PostgreSQL", "Redis"]</span>;</div>
+                <div><span class="line-no">05</span><span class="comment">// build with clarity</span></div>
+              </div>
+              <div class="tech-orbit"><span>Python</span><span>Django</span><span>DRF</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span></div>
             </div>
+          </div>
+          <div class="floating-note"><small data-i18n="card_experience_label">BACKEND EXPERIENCE</small><strong data-i18n="card_experience_value">3+ YEARS</strong></div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Right: Text Content -->
-            <div class="col-span-3 md:col-span-2 text-center md:text-left">
-                <p class="text-xl font-medium text-[#5BC0BE]" data-i18n="intro_greeting">Hello, I'm</p>
-                <h2 id="profile-name"
-                    class="text-6xl sm:text-7xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#4A90E2] to-[#72B9FF]">
-                    Amir Rezaiyan
-                </h2>
-                <h3 id="profile-title" class="text-3xl font-light text-gray-300 mb-6" data-i18n="intro_title">Backend Developer</h3>
-                <!-- Typed.js Animation Target (Strings are always EN) -->
-                <p class="text-2xl font-mono h-8">
-                    <span id="typed-output" class="text-yellow-400"></span>
-                </p>
-                <p id="profile-bio" class="mt-8 text-lg text-gray-400 max-w-xl mx-auto md:mx-0" data-i18n="intro_bio">
-                    Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in
-                    modern web frameworks, and database optimization.
-                </p>
+    <div class="container metrics-wrap">
+      <div class="metrics reveal">
+        <div class="metric"><div class="metric-number"><span class="count-up" data-count="3">3</span>+</div><div class="metric-label"><b data-i18n="metric_experience_title">Backend Experience</b><span data-i18n="metric_experience_sub">Years building backend systems</span></div></div>
+        <div class="metric"><div class="metric-number">Py</div><div class="metric-label"><b data-i18n="metric_python_title">Python-focused</b><span data-i18n="metric_python_sub">Backend development ecosystem</span></div></div>
+        <div class="metric"><div class="metric-number">API</div><div class="metric-label"><b data-i18n="metric_api_title">API Engineering</b><span data-i18n="metric_api_sub">Design, implementation & integration</span></div></div>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-intro reveal">
+          <div class="eyebrow" data-i18n="about_eyebrow">A LITTLE ABOUT ME</div>
+          <h2 data-i18n="about_title">Thoughtful backend work, from the data layer up.</h2>
+          <p data-i18n="about_text">I'm a backend developer working primarily with Python and its web ecosystem. I enjoy turning product requirements into understandable APIs, well-structured data models, and codebases that remain practical to maintain as they grow.</p>
+        </div>
+        <div class="about-content">
+          <article class="focus-card reveal" data-delay="1">
+            <div class="focus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/><path d="m15 16 2 2 4-4"/></svg></div>
+            <div><h3 data-i18n="focus_api_title">Clear API design</h3><p data-i18n="focus_api_text">Building understandable REST endpoints, organizing application logic, and keeping the contract between services consistent.</p></div>
+          </article>
+          <article class="focus-card reveal" data-delay="2">
+            <div class="focus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></div>
+            <div><h3 data-i18n="focus_data_title">Data and persistence</h3><p data-i18n="focus_data_text">Working with relational data, database design, query behavior, and caching patterns using PostgreSQL and Redis.</p></div>
+          </article>
+          <article class="focus-card reveal" data-delay="3">
+            <div class="focus-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8m0-12.8-2.8 2.8m-7.2 7.2-2.8 2.8"/><circle cx="12" cy="12" r="4"/></svg></div>
+            <div><h3 data-i18n="focus_quality_title">Maintainability and quality</h3><p data-i18n="focus_quality_text">Keeping code organized, applying sound engineering practices, and making room for testing and future changes.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow" data-i18n="skills_eyebrow">MY TOOLKIT</div><h2 data-i18n="skills_title">Technologies I work with.</h2></div>
+          <p data-i18n="skills_intro">A backend-first toolkit for building web applications, APIs, and data-driven services.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-group reveal"><div class="skill-head"><span class="skill-index">01 /</span><h3 data-i18n="skill_languages">Language</h3></div><div class="skill-tags"><span>Python</span><span>JavaScript</span></div></article>
+          <article class="skill-group reveal" data-delay="1"><div class="skill-head"><span class="skill-index">02 /</span><h3 data-i18n="skill_frameworks">Backend frameworks</h3></div><div class="skill-tags"><span>Django</span><span>Django REST Framework</span><span>FastAPI</span><span>Flask</span></div></article>
+          <article class="skill-group reveal" data-delay="2"><div class="skill-head"><span class="skill-index">03 /</span><h3 data-i18n="skill_data">Databases & caching</h3></div><div class="skill-tags"><span>PostgreSQL</span><span>Redis</span><span>SQL</span></div></article>
+          <article class="skill-group reveal" data-delay="3"><div class="skill-head"><span class="skill-index">04 /</span><h3 data-i18n="skill_async">Async & messaging</h3></div><div class="skill-tags"><span>Celery</span><span>RabbitMQ</span><span>Asyncio</span></div></article>
+          <article class="skill-group reveal"><div class="skill-head"><span class="skill-index">05 /</span><h3 data-i18n="skill_tools">Development tools</h3></div><div class="skill-tags"><span>Git</span><span>Docker</span><span>Nginx</span><span>Uvicorn</span></div></article>
+          <article class="skill-group reveal" data-delay="1"><div class="skill-head"><span class="skill-index">06 /</span><h3 data-i18n="skill_web">Web fundamentals</h3></div><div class="skill-tags"><span>REST APIs</span><span>HTML</span><span>CSS</span><span>HTTP</span><span>JWT</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow" data-i18n="experience_eyebrow">WHERE I'VE WORKED</div><h2 data-i18n="experience_title">Experience & learning.</h2></div>
+          <p data-i18n="experience_intro">A concise overview of my professional experience and independent backend work.</p>
+        </div>
+        <div class="experience-list">
+          <article class="experience-card reveal">
+            <div class="experience-date"><span data-i18n="independent_date">SEP 2025 — PRESENT</span><span class="experience-type" data-i18n="independent_type">INDEPENDENT WORK</span></div>
+            <div class="experience-main"><h3 data-i18n="independent_title">Independent Backend Developer</h3><div class="experience-company" data-i18n="independent_company">Independent Projects</div><p data-i18n="independent_text">Developing and improving backend-focused applications, working with Python web frameworks, REST APIs, relational databases, and maintainable application structure.</p><div class="experience-tags"><span>Python</span><span>Django</span><span>REST APIs</span><span>PostgreSQL</span></div></div>
+          </article>
+          <article class="experience-card reveal" data-delay="1">
+            <div class="experience-date"><span data-i18n="greenplus_date">NOV 2024 — JUL 2025</span><span class="experience-type" data-i18n="greenplus_type">INTERNSHIP · 9 MONTHS</span></div>
+            <div class="experience-main"><h3 data-i18n="greenplus_title">Backend Developer Intern</h3><div class="experience-company">GreenPlus</div><p data-i18n="greenplus_text">Completed a backend development internship. During the final three months, contributed to work on GreenPlus's own product as part of the development experience.</p><div class="experience-tags"><span>Backend Development</span><span>Product Work</span><span>Team Collaboration</span></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow" data-i18n="approach_eyebrow">HOW I THINK ABOUT BACKEND</div><h2 data-i18n="approach_title">Good software is built in the details.</h2></div>
+          <p data-i18n="approach_intro">The principles I try to bring into everyday engineering decisions.</p>
+        </div>
+        <div class="approach-grid">
+          <article class="approach-card reveal"><span class="approach-number">01 — STRUCTURE</span><h3 data-i18n="approach_structure_title">Organize before complexity grows</h3><p data-i18n="approach_structure_text">Clear boundaries and readable application structure make features easier to reason about, test, and extend.</p></article>
+          <article class="approach-card reveal" data-delay="1"><span class="approach-number">02 — DATA</span><h3 data-i18n="approach_data_title">Treat data as a design decision</h3><p data-i18n="approach_data_text">Thoughtful models, constraints, and query patterns are central to reliable applications and predictable behavior.</p></article>
+          <article class="approach-card reveal" data-delay="2"><span class="approach-number">03 — RELIABILITY</span><h3 data-i18n="approach_reliability_title">Make behavior predictable</h3><p data-i18n="approach_reliability_text">Validation, sensible error handling, and tests help keep APIs easier to use and maintain.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <div class="eyebrow" data-i18n="contact_eyebrow">LET'S CONNECT</div>
+            <h2 data-i18n="contact_title">Have a backend challenge in mind?</h2>
+            <p data-i18n="contact_text">I'm open to meaningful conversations, collaboration, and backend development opportunities. Feel free to reach out.</p>
+            <div class="social-row">
+              <a class="social-link" href="https://github.com/AmirRezaiyan" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 .1.7 2.04 3.77 1.47.1-.72.4-1.22.7-1.5-2.48-.28-5.08-1.24-5.08-5.5 0-1.22.44-2.22 1.16-3-.12-.28-.5-1.42.11-2.96 0 0 .95-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.1-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.16 1.78 1.16 3 0 4.27-2.6 5.21-5.09 5.49.4.35.75 1.03.75 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>GitHub</a>
+              <a class="social-link" href="https://t.me/AmirRezaiyann" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 4.2 18.6 20c-.24 1.12-.86 1.4-1.74.88l-4.8-3.54-2.32 2.23c-.26.26-.48.48-.98.48l.35-4.9 8.92-8.06c.39-.35-.08-.55-.6-.2L6.4 13.9l-4.7-1.47c-1.02-.32-1.04-1.02.21-1.5L20.3 3.7c.85-.31 1.6.2 1.5.5Z"/></svg>Telegram</a>
+              <a class="social-link" href="tel:09910803518"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16.4v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 1.1 3.7 2 2 0 0 1 3.1 1.5h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L7 9.2a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 2 2.3Z"/></svg>09910803518</a>
             </div>
-        </section>
-
-        <!-- 2. Metrics/Highlights Section -->
-        <section id="metrics" class="py-10">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="metrics_title">Performance Highlights</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-
-                <!-- Metric Card 1: Experience -->
-                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll">
-                    <p class="metric-value text-[#72B9FF]" data-i18n="metric_exp_value">+2 years</p>
-                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_exp_label">Backend Experience</p>
-                </div>
-
-                <!-- Metric Card 2: Uptime Improvement -->
-                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll" data-delay="0.1">
-                    <p class="metric-value text-[#5BC0BE]" data-i18n="metric_uptime_value">99.9%</p>
-                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_uptime_label">System Uptime</p>
-                </div>
-
-                <!-- Metric Card 3: Code Coverage -->
-                <div class="glass-card p-8 rounded-2xl text-center animate-on-scroll" data-delay="0.2">
-                    <p class="metric-value text-red-400" data-i18n="metric_coverage_value">85%</p>
-                    <p class="text-xl font-medium text-gray-400" data-i18n="metric_coverage_label">Average Code Coverage</p>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 3. Skills Section -->
-        <section id="skills" class="py-10">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="skills_title">Technical Skills</h2>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Skill Category: Languages -->
-                <div class="glass-card p-6 rounded-2xl animate-on-scroll">
-                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_languages">Languages</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                    </div>
-                </div>
-
-                <!-- Skill Category: Frameworks -->
-                <div class="glass-card p-6 rounded-2xl animate-on-scroll" data-delay="0.1">
-                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_frameworks">Frameworks</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">DRF</span>
-                        <span class="skill-tag">Asyncio</span>
-                        <span class="skill-tag">JWT</span>
-                    </div>
-                </div>
-
-                <!-- Skill Category: Tools & Ops -->
-                <div class="glass-card p-6 rounded-2xl animate-on-scroll" data-delay="0.2">
-                    <h3 class="text-3xl font-semibold mb-6 text-[#72B9FF]" data-i18n="skills_tools_ops">Tools & Ops</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Celery</span>
-                        <span class="skill-tag">RabbitMQ</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Uvicorn</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Nginx</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GitHub Link Button (Dynamically updated) -->
-            <div class="text-center mt-12 animate-on-scroll" data-delay="0.3">
-                <a id="github-project-link" href="https://www.github.com/AmirRezaiyan" target="_blank"
-                    class="inline-block px-8 py-4 bg-[#4A90E2] text-white font-bold text-lg rounded-full shadow-lg hover:bg-[#72B9FF] transition duration-300 transform hover:scale-105"
-                    data-i18n="github_link_text">
-                    View my code on GitHub
-                </a>
-            </div>
-        </section>
-
-        <!-- 4. Backend Architecture Diagram -->
-        <section id="architecture" class="py-10">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="arch_title">Backend Architecture Overview</h2>
-
-            <div class="glass-card p-6 sm:p-10 rounded-3xl animate-on-scroll">
-                <div id="arch-container"
-                    class="flex flex-col items-center space-y-8 md:space-y-0 md:flex-row md:justify-around text-center relative p-4">
-
-                    <!-- Node 1: Client -->
-                    <div id="node-client" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
-                        <div
-                            class="arch-node w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center border-2 border-green-400 hover:bg-green-500/40">
-                            <span class="text-3xl">💻</span>
-                        </div>
-                        <p class="mt-2 text-lg font-semibold text-green-300" data-i18n="arch_node_client_name">Client</p>
-                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_client_tooltip">
-                            Web/Mobile App initiates the request (HTTP).
-                        </div>
-                    </div>
-
-                    <!-- Node 2: Backend (API) -->
-                    <div id="node-backend" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
-                        <div
-                            class="arch-node w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center border-2 border-blue-400 hover:bg-blue-500/40">
-                            <span class="text-3xl">⚙️</span>
-                        </div>
-                        <p class="mt-2 text-lg font-semibold text-blue-300" data-i18n="arch_node_backend_name">Backend</p>
-                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_backend_tooltip">
-                            Python (Django/FastAPI) handles business logic, security, and routing.
-                        </div>
-                    </div>
-
-                    <!-- Node 3: DB/Cache -->
-                    <div id="node-db" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
-                        <div
-                            class="arch-node w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center border-2 border-red-400 hover:bg-red-500/40">
-                            <span class="text-3xl">🗄️</span>
-                        </div>
-                        <p class="mt-2 text-lg font-semibold text-red-300" data-i18n="arch_node_db_name">DB/Cache</p>
-                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_db_tooltip">
-                            PostgreSQL for persistence, Redis for high-speed caching and sessions.
-                        </div>
-                    </div>
-
-                    <!-- Node 4: Worker/Queue -->
-                    <div id="node-worker" class="arch-node-container w-40 h-40 flex flex-col items-center z-10">
-                        <div
-                            class="arch-node w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center border-2 border-purple-400 hover:bg-purple-500/40">
-                            <span class="text-3xl">📦</span>
-                        </div>
-                        <p class="mt-2 text-lg font-semibold text-purple-300" data-i18n="arch_node_worker_name">Worker</p>
-                        <div class="tooltip absolute mt-20 p-2 text-sm bg-gray-800 rounded-lg text-white max-w-xs" data-i18n="arch_node_worker_tooltip">
-                            Celery/RabbitMQ handles async jobs like notifications and heavy processing.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Technical Deep Dives -->
-        <section id="deep-dives" class="py-10">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="dives_title">Technical Deep Dives</h2>
-            <p class="text-center text-xl text-gray-400 mb-10 animate-on-scroll" data-i18n="dives_subtitle">
-                Detailed insights into challenging projects and solutions I have implemented.
-            </p>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Deep Dive Card 1: Caching Strategies -->
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between animate-on-scroll">
-                    <div>
-                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="dive1_title">Scaling with Caching Strategies</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="skill-tag">Redis Database Optimisation</span>
-                            <span class="skill-tag">Cache-Aside Pattern</span>
-                            <span class="skill-tag">TTL Management</span>
-                        </div>
-
-                        <p class="text-gray-300 mt-4 leading-relaxed" data-i18n="dive1_desc">
-                            I focus on implementing strategic caching using **Redis** (or Memcached) to handle high read
-                            traffic.
-                            This includes **cache-aside patterns** for database lookups and **time-to-live (TTL)**
-                            management
-                            for high-volatility data, significantly improving P95 latency and reducing database load.
-                        </p>
-                    </div>
-                    <p class="mt-4 text-sm font-semibold text-[#5BC0BE]" data-i18n="dive1_focus">Focus: Performance and Latency Reduction</p>
-                </div>
-
-                <!-- Deep Dive Card 2: Async Task Handling -->
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between animate-on-scroll"
-                    data-delay="0.1">
-                    <div>
-                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="dive2_title">Reliable Asynchronous Task Processing</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="skill-tag">Celery</span>
-                            <span class="skill-tag">RabbitMQ / Redis Broker</span>
-                            <span class="skill-tag">Retries and Error Handling</span>
-                        </div>
-                        <p class="text-gray-300 mt-4 leading-relaxed" data-i18n="dive2_desc">
-                            Implementing robust **Celery** workers backed by a message broker (like **RabbitMQ**) to
-                            offload
-                            expensive operations (e.g., image processing, email sending) from the main API thread. This
-                            ensures
-                            a fast user experience, prevents API timeouts, and utilizes features like **retries and error
-                            handling** for mission-critical jobs.
-                        </p>
-                    </div>
-                    <p class="mt-4 text-sm font-semibold text-[#5BC0BE]" data-i18n="dive2_focus">Focus: Scalability and System Reliability</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Experience Timeline Section -->
-        <section id="experience" class="py-10">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="exp_title">Professional Experience</h2>
-
-            <div class="timeline animate-on-scroll">
-
-                <!-- Job 1: Current Role (Junior/Mid Level) -->
-                <div class="timeline-container right">
-                    <div class="timeline-content glass-card p-6 rounded-xl">
-                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="exp1_title">Backend Developer</h3>
-                        <p class="text-xl font-semibold text-gray-300" data-i18n="exp1_company">Tech Solutions Co.</p>
-                        <p class="text-gray-500 mb-4" data-i18n="exp1_duration">2023 - Present</p>
-                        <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li data-i18n="exp1_bullet1">Developed and maintained core API endpoints using **Django REST Framework** and
-                                **FastAPI**.</li>
-                            <li data-i18n="exp1_bullet2">Collaborated on architectural decisions for service scaling and database performance.</li>
-                            <li data-i18n="exp1_bullet3">Implemented unit and integration tests to ensure code quality and stability.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Job 2: Previous Role (Initial Role/Internship) -->
-                <div class="timeline-container left">
-                    <div class="timeline-content glass-card p-6 rounded-xl">
-                        <h3 class="text-3xl font-bold text-[#72B9FF]" data-i18n="exp2_title">Senior Python Developer</h3>
-                        <p class="text-xl font-semibold text-gray-300" data-i18n="exp2_company">Web Innovation Hub</p>
-                        <p class="text-gray-500 mb-4" data-i18n="exp2_duration">2022 - 2023</p>
-                        <ul class="list-disc list-inside text-gray-400 space-y-2">
-                            <li data-i18n="exp2_bullet1">Contributed to backend feature development and bug fixes under senior guidance.</li>
-                            <li data-i18n="exp2_bullet2">Gained hands-on experience with version control (**Git**) and deployment workflows.</li>
-                            <li data-i18n="exp2_bullet3">Wrote clean, documented code following **PEP 8** standards.</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- 7. Contact Section -->
-        <section id="contact" class="py-10 mb-20">
-            <h2 class="text-5xl font-bold text-center mb-12 text-[#5BC0BE]" data-i18n="contact_title">Get In Touch</h2>
-
-            <div class="glass-card p-6 sm:p-10 rounded-3xl animate-on-scroll">
-                <p class="text-center text-xl text-gray-400 mb-8" data-i18n="contact_text">
-                    Let's connect and discuss your next project. I'm always open to new challenges.
-                </p>
-
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-
-                    <!-- GitHub Link -->
-                    <a id="contact-github-link" href="https://www.github.com/AmirRezaiyan" target="_blank"
-                        class="contact-item bg-gray-700 hover:bg-gray-600">
-                        <!-- SVG Icon for GitHub -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3.5 0 4.2-2.2 4.2-4.2 0-.3 0-.7-.1-1 1-.9 1.7-2.6.4-3.7-1-1.2-4.2-.7-5.5-.3a4.5 4.5 0 0 0-2.4 0c-1.3-.4-4.5-.9-5.5.3-1.3 1.1-.6 2.8.4 3.7-.1.3-.1.7-.1 1 0 2 0 4.2 4.2 4.2-.2.2-.4.7-.4 1.5v4" />
-                            <path
-                                d="M9 18c-3.1 0-5.8-.8-5.8-1.5 0-.7 2.7-1.5 5.8-1.5s5.8.8 5.8 1.5c0 .7-2.7 1.5-5.8 1.5Z" />
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" />
-                        </svg>
-                        <span id="github-text">GitHub</span>
-                    </a>
-
-                    <!-- Telegram Link -->
-                    <a id="contact-telegram-link" href="https://t.me/AmirRezaiyann" target="_blank"
-                        class="contact-item bg-[#0088CC] hover:bg-[#00A1F0]">
-                        <!-- SVG Icon for Telegram -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 8.44a1.76 1.76 0 0 0-1.76-1.76h-3.68l-6.88 4.76L3.68 6.68H2.4a.68.68 0 0 0-.68.68v9.44a.68.68 0 0 0 .68.68h1.28a1.76 1.76 0 0 0 1.76-1.76v-7.8l5.88 4.08 7.08-4.92v4.84a1.76 1.76 0 0 0 1.76 1.76h.68a.68.68 0 0 0 .68-.68V8.44Z" />
-                        </svg>
-                        <span id="telegram-text">Telegram</span>
-                    </a>
-
-                    <!-- Phone Number -->
-                    <a id="contact-phone-link" href="tel:09910803518"
-                        class="contact-item bg-[#5BC0BE] hover:bg-[#72B9FF]">
-                        <!-- SVG Icon for Phone -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.83 19.83 0 0 1-5.11-4.71c-.72-1.21-1.1-2.38-1.12-3.66a18.25 18.25 0 0 1 3.52-5.78l1.41-1.41a2 2 0 0 1 2.83 0l2.67 2.67a2 2 0 0 1 0 2.83l-1.07 1.07a1 1 0 0 0-.24 1.05c.57 1.48 1.42 2.76 2.45 3.8a10.42 10.42 0 0 0 3.32 2.69 1 1 0 0 0 1.05-.24l1.07-1.07a2 2 0 0 1 2.83 0l2.67 2.67a2 2 0 0 1 0 2.83Z" />
-                        </svg>
-                        <span id="phone-text">09910803518</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center py-6 text-gray-500 text-sm border-t border-white/5 mt-10">
-        &copy; <span id="current-year">2024</span> <span data-i18n="footer_copyright">Amir Rezaiyan. Designed with Tailwind CSS & GSAP.</span>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-
-            /* ---------------------------
-               I18N: TRANSLATION DATA
-               --------------------------- */
-
-            // Full dictionary of all English and Persian strings used in the UI
-            const i18n = {
-                // Typed.js strings (Always static, in English)
-                'typed_strings_en': [
-                    "Python", "Django", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "RabbitMQ", "Git", "OOP", "HTML | CSS"
-                ],
-                
-                'page_title': {
-                    en: 'Amir Rezaiyan | Backend Developer Resume',
-                    fa: 'امیر رضائیان | رزومه توسعه‌دهنده بک‌اند'
-                },
-                'header_initials': {
-                    en: 'A.R.',
-                    fa: 'ا.ر.'
-                },
-                'nav_intro': { en: 'Intro', fa: 'معرفی' },
-                'nav_highlights': { en: 'Highlights', fa: 'دستاوردها' },
-                'nav_skills': { en: 'Skills', fa: 'مهارت‌ها' },
-                'nav_architecture': { en: 'Architecture', fa: 'معماری' },
-                'nav_deep_dives': { en: 'Deep Dives', fa: 'بررسی‌های فنی' },
-                'nav_experience': { en: 'Experience', fa: 'سوابق' },
-                'nav_contact': { en: 'Contact', fa: 'تماس' },
-                'intro_greeting': { en: "Hello, I'm", fa: 'سلام، من' },
-                'intro_title': { en: 'Backend Developer', fa: 'توسعه‌دهنده بک‌اند' },
-                'intro_bio': {
-                    en: 'Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in modern web frameworks, and database optimization.',
-                    fa: 'توسعه‌دهنده متعهد پایتون متخصص در سیستم‌های بک‌اند مقیاس‌پذیر، قوی و تمیز. دارای تخصص در فریمورک‌های وب مدرن و بهینه‌سازی پایگاه داده.'
-                },
-                'metrics_title': { en: 'Performance Highlights', fa: 'دستاورد‌های عملکردی' },
-                'metric_exp_value': { en: '+2 years', fa: '+۲ سال' },
-                'metric_exp_label': { en: 'Backend Experience', fa: 'تجربه بک‌اند' },
-                'metric_uptime_value': { en: '99.9%', fa: '۹۹.۹٪' },
-                'metric_uptime_label': { en: 'System Uptime', fa: 'پایداری سیستم' },
-                'metric_coverage_value': { en: '85%', fa: '۸۵٪' },
-                'metric_coverage_label': { en: 'Average Code Coverage', fa: 'پوشش کد متوسط' },
-                'skills_title': { en: 'Technical Skills', fa: 'مهارت‌های فنی' },
-                'skills_languages': { en: 'Languages', fa: 'زبان‌ها' },
-                'skills_frameworks': { en: 'Frameworks', fa: 'فریمورک‌ها' },
-                'skills_tools_ops': { en: 'Tools & Ops', fa: 'ابزارها و عملیات' },
-                'github_link_text': { en: 'View my code on GitHub', fa: 'مشاهده کد در گیت‌هاب' },
-                'arch_title': { en: 'Backend Architecture Overview', fa: 'مروری بر معماری بک‌اند' },
-                'arch_node_client_name': { en: 'Client', fa: 'کلاینت' },
-                'arch_node_client_tooltip': {
-                    en: 'Web/Mobile App initiates the request (HTTP).',
-                    fa: 'برنامه وب/موبایل درخواست را آغاز می‌کند (HTTP).'
-                },
-                'arch_node_backend_name': { en: 'Backend', fa: 'بک‌اند' },
-                'arch_node_backend_tooltip': {
-                    en: 'Python (Django/FastAPI) handles business logic, security, and routing.',
-                    fa: 'پایتون (Django/FastAPI) منطق تجاری، امنیت و مسیریابی را مدیریت می‌کند.'
-                },
-                'arch_node_db_name': { en: 'DB/Cache', fa: 'پایگاه داده/کش' },
-                'arch_node_db_tooltip': {
-                    en: 'PostgreSQL for persistence, Redis for high-speed caching and sessions.',
-                    fa: 'PostgreSQL برای پایداری، Redis برای کش سریع و سشن‌ها.'
-                },
-                'arch_node_worker_name': { en: 'Worker', fa: 'Worker' },
-                'arch_node_worker_tooltip': {
-                    en: 'Celery/RabbitMQ handles async jobs like notifications and heavy processing.',
-                    fa: 'Celery/RabbitMQ وظایف ناهمگام مانند اعلان‌ها و پردازش‌های سنگین را مدیریت می‌کند.'
-                },
-                'dives_title': { en: 'Technical Deep Dives', fa: 'بررسی‌های فنی عمیق' },
-                'dives_subtitle': {
-                    en: 'Detailed insights into challenging projects and solutions I have implemented.',
-                    fa: 'بینش‌های دقیق در مورد پروژه‌های چالش‌برانگیز و راه‌حل‌هایی که پیاده‌سازی کرده‌ام.'
-                },
-                'dive1_title': { en: 'Scaling with Caching Strategies', fa: 'مقیاس‌پذیری با استراتژی‌های کشینگ' },
-                'dive1_desc': {
-                    en: 'I focus on implementing strategic caching using **Redis** (or Memcached) to handle high read traffic. This includes **cache-aside patterns** for database lookups and **time-to-live (TTL)** management for high-volatility data, significantly improving P95 latency and reducing database load.',
-                    fa: 'تمرکز من بر پیاده‌سازی کشینگ استراتژیک با استفاده از **Redis** (یا Memcached) برای مدیریت ترافیک بالای خواندن است. این شامل **الگوهای cache-aside** برای جستجوهای پایگاه داده و مدیریت **زمان ماندگاری (TTL)** برای داده‌های با نوسان بالا است که تأخیر P95 را به طور قابل توجهی بهبود می‌بخشد و بار پایگاه داده را کاهش می‌دهد.'
-                },
-                'dive1_focus': { en: 'Focus: Performance and Latency Reduction', fa: 'تمرکز: عملکرد و کاهش تأخیر' },
-                'dive2_title': { en: 'Reliable Asynchronous Task Processing', fa: 'پردازش وظایف ناهمگام قابل اعتماد' },
-                'dive2_desc': {
-                    en: 'Implementing robust **Celery** workers backed by a message broker (like **RabbitMQ**) to offload expensive operations (e.g., image processing, email sending) from the main API thread. This ensures a fast user experience, prevents API timeouts, and utilizes features like **retries and error handling** for mission-critical jobs.',
-                    fa: 'پیاده‌سازی کارگران **Celery** قوی با پشتیبانی از یک کارگزار پیام (مانند **RabbitMQ**) برای انتقال عملیات پرهزینه (مانند پردازش تصویر، ارسال ایمیل) از رشته اصلی API. این کار تجربه کاربری سریع را تضمین می‌کند، از مهلت‌های زمانی API جلوگیری می‌نماید، و از ویژگی‌هایی مانند **تلاش مجدد و مدیریت خطا** برای وظایف حیاتی استفاده می‌کند.'
-                },
-                'dive2_focus': { en: 'Focus: Scalability and System Reliability', fa: 'تمرکز: مقیاس‌پذیری و قابلیت اطمینان سیستم' },
-                'exp_title': { en: 'Professional Experience', fa: 'سوابق شغلی' },
-                'exp1_title': { en: 'Backend Developer', fa: 'توسعه‌دهنده بک‌اند' },
-                'exp1_company': { en: 'Tech Solutions Co.', fa: 'شرکت راه‌حل‌های فناوری' },
-                'exp1_duration': { en: '2023 - Present', fa: '۱۴۰۲ - اکنون' },
-                'exp1_bullet1': {
-                    en: 'Developed and maintained core API endpoints using **Django REST Framework** and **FastAPI**.',
-                    fa: 'توسعه و نگهداری از اندپوینت‌های اصلی API با استفاده از **Django REST Framework** و **FastAPI**.'
-                },
-                'exp1_bullet2': {
-                    en: 'Collaborated on architectural decisions for service scaling and database performance.',
-                    fa: 'همکاری در تصمیمات معماری برای مقیاس‌بندی سرویس‌ها و عملکرد پایگاه داده.'
-                },
-                'exp1_bullet3': {
-                    en: 'Implemented unit and integration tests to ensure code quality and stability.',
-                    fa: 'پیاده‌سازی تست‌های واحد و یکپارچه‌سازی برای اطمینان از کیفیت و پایداری کد.'
-                },
-                'exp2_title': { en: 'Senior Python Developer', fa: 'توسعه‌دهنده پایتون (سطح ارشد)' },
-                'exp2_company': { en: 'Web Innovation Hub', fa: 'مرکز نوآوری وب' },
-                'exp2_duration': { en: '2022 - 2023', fa: '۱۴۰۱ - ۱۴۰۲' },
-                'exp2_bullet1': {
-                    en: 'Contributed to backend feature development and bug fixes under senior guidance.',
-                    fa: 'مشارکت در توسعه ویژگی‌های بک‌اند و رفع اشکال تحت هدایت تیم ارشد.'
-                },
-                'exp2_bullet2': {
-                    en: 'Gained hands-on experience with version control (**Git**) and deployment workflows.',
-                    fa: 'کسب تجربه عملی با کنترل نسخه (**Git**) و جریان‌های کاری استقرار.'
-                },
-                'exp2_bullet3': {
-                    en: 'Wrote clean, documented code following **PEP 8** standards.',
-                    fa: 'نوشتن کد تمیز و مستند مطابق با استانداردهای **PEP 8**.'
-                },
-                'contact_title': { en: 'Get In Touch', fa: 'در تماس باشید' },
-                'contact_text': {
-                    en: "Let's connect and discuss your next project. I'm always open to new challenges.",
-                    fa: 'بیایید ارتباط برقرار کنیم و درباره پروژه بعدی شما صحبت کنیم. من همیشه پذیرای چالش‌های جدید هستم.'
-                },
-                'footer_copyright': {
-                    en: 'Amir Rezaiyan. Designed with Tailwind CSS & GSAP.',
-                    fa: 'امیر رضائیان. طراحی شده با Tailwind CSS و GSAP.'
-                }
-            };
-
-            const LANG_KEY = 'userLang';
-            let currentLang = localStorage.getItem(LANG_KEY) || 'en';
-            let typedInstance = null;
-            
-            // Strings for Typed.js (Always static, in English)
-            const TYPED_STRINGS = i18n.typed_strings_en; 
-
-
-            // Replaces Typed.js instance with new strings
-            function updateTypedJs() {
-                if (typedInstance) {
-                    typedInstance.destroy(); // Destroy previous instance
-                }
-                
-                typedInstance = new Typed('#typed-output', {
-                    strings: TYPED_STRINGS,
-                    typeSpeed: 50,
-                    backSpeed: 30,
-                    startDelay: 500,
-                    loop: true,
-                    shuffle: true,
-                });
-            }
-
-            /**
-             * Translates all elements with a data-i18n attribute on the page.
-             * Also updates the document's directionality (RTL/LTR) and font.
-             */
-            function translatePage(lang) {
-                // 1. Update HTML language and direction
-                const htmlEl = document.documentElement;
-                const bodyEl = document.body;
-                const toggleButton = document.getElementById('lang-toggle');
-                
-                htmlEl.lang = lang;
-                
-                if (lang === 'fa') {
-                    bodyEl.classList.add('rtl');
-                    bodyEl.dir = 'rtl';
-                    // Button shows the language to switch TO (English)
-                    toggleButton.textContent = 'English'; 
-                } else {
-                    bodyEl.classList.remove('rtl');
-                    bodyEl.dir = 'ltr';
-                    // Button shows the language to switch TO (Persian)
-                    toggleButton.textContent = 'فارسی'; 
-                }
-
-                // 2. Translate all elements
-                document.querySelectorAll('[data-i18n]').forEach(element => {
-                    const key = element.getAttribute('data-i18n');
-                    const translation = i18n[key];
-
-                    if (translation && translation[lang]) {
-                        // Check for raw HTML content (e.g., bullet points with bold text)
-                        if (translation[lang].includes('**')) {
-                            let text = translation[lang];
-                            // Replace **text** with <strong>text</strong>
-                            element.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                        } else if (element.tagName === 'TITLE') {
-                            document.title = translation[lang];
-                        } else {
-                            element.textContent = translation[lang];
-                        }
-                    }
-                });
-
-                // 3. Update Typed.js strings (always uses EN strings)
-                updateTypedJs();
-                
-                // 4. Update local storage
-                localStorage.setItem(LANG_KEY, lang);
-            }
-
-            /**
-             * Toggles the language between English (en) and Persian (fa).
-             */
-            function toggleLanguage() {
-                currentLang = currentLang === 'en' ? 'fa' : 'en';
-                translatePage(currentLang);
-            }
-
-            /* ---------------------------
-               STATIC PROFILE & LINKS
-               --------------------------- */
-            const PROFILE = {
-                name: 'Amir Rezaiyan',
-                title: 'Backend Developer',
-                bio: 'Dedicated Python developer specializing in scalable, robust, and clean backend systems. Expertise in modern web frameworks, and database optimization.',
-                phoneNumber: '09910803518',
-                telegramId: 'AmirRezaiyann',
-                githubUrl: 'https://github.com/AmirRezaiyan',
-                profilePictureUrl: '/static/myprofile/profile.jpg' // Assuming a placeholder image is used or the user has one
-            };
-
-            function initializeAnimations() {
-                /* -------------------------------------
-                   GSAP Scroll Animations
-                   ------------------------------------- */
-                gsap.registerPlugin(ScrollTrigger);
-
-                // Animate Introduction Section (Initial Load)
-                gsap.from("#introduction", {
-                    opacity: 0,
-                    y: 50,
-                    duration: 1,
-                    ease: "power3.out"
-                });
-
-                // Animate general sections/cards on scroll
-                document.querySelectorAll('.animate-on-scroll').forEach((card) => {
-                    // Check if ScrollTrigger is already associated with this element to prevent duplicates
-                    if (!ScrollTrigger.getById(card.id || card.dataset.delay)) {
-                        const delay = parseFloat(card.dataset.delay) || 0;
-                        gsap.from(card, {
-                            scrollTrigger: {
-                                id: card.id || card.dataset.delay, // Use ID or delay as unique ID
-                                trigger: card,
-                                start: "top 85%",
-                                toggleActions: "play none none none", // Only run once when scrolling down
-                            },
-                            opacity: 0,
-                            y: 30,
-                            duration: 0.8,
-                            delay: delay,
-                            ease: "power2.out"
-                        });
-                    }
-                });
-
-                // Force a ScrollTrigger refresh after all elements are visible/loaded
-                setTimeout(() => {
-                    if (ScrollTrigger) {
-                        ScrollTrigger.refresh(true);
-                        console.log("ScrollTrigger refreshed after content load.");
-                    }
-                }, 100);
-            }
-
-            function applyProfile(data) {
-                // Intro Texts (These are hardcoded and not translated, so only need to be set once)
-                document.getElementById('profile-name').textContent = data.name || 'Amir Rezaiyan';
-                // Title and Bio are translated via data-i18n, so only need initial load if not translated
-                
-                const picContainer = document.getElementById('profile-picture-container');
-                const defaultSvg = document.getElementById('default-profile-svg');
-                defaultSvg.classList.remove('hidden');
-
-                if (data.profilePictureUrl) {
-                    const img = new Image();
-                    img.src = data.profilePictureUrl;
-                    img.alt = data.name;
-                    img.classList.add('w-full', 'h-full', 'object-cover', 'rounded-full');
-
-                    // If the image loads successfully, hide SVG and append image
-                    img.onload = () => {
-                        defaultSvg.classList.add('hidden');
-                        picContainer.innerHTML = '';
-                        picContainer.appendChild(img);
-                    };
-
-                    // If the image fails to load, show SVG
-                    img.onerror = () => {
-                        defaultSvg.classList.remove('hidden');
-                        console.error('Profile picture failed to load. Showing default SVG.');
-                    };
-                }
-
-                updateContactLinks(data);
-            }
-
-            function updateContactLinks(data) {
-                const gh = data.githubUrl || '#';
-                document.getElementById('github-project-link').href = gh;
-                document.getElementById('contact-github-link').href = gh;
-
-                const phoneTextEl = document.getElementById('phone-text');
-                const phoneLinkEl = document.getElementById('contact-phone-link');
-                phoneTextEl.textContent = data.phoneNumber || 'N/A';
-                phoneLinkEl.href = data.phoneNumber ? `tel:${data.phoneNumber.replace(/\s/g, '')}` : '#';
-
-                const tgTextEl = document.getElementById('telegram-text');
-                const tgLinkEl = document.getElementById('contact-telegram-link');
-                tgTextEl.textContent = data.telegramId || 'Telegram';
-                tgLinkEl.href = data.telegramId ? `https://t.me/${data.telegramId.replace('@', '')}` : '#';
-            }
-
-
-            // 1. Set up event listener for the language toggle button
-            document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
-
-            // 2. Apply static profile details (text and links)
-            applyProfile(PROFILE);
-
-            // 3. Translate page immediately based on saved preference (or default 'en')
-            translatePage(currentLang);
-
-            // 4. Initialize ALL animations
-            initializeAnimations();
-
+          </div>
+          <div class="contact-actions">
+            <a class="button button-primary" href="https://t.me/AmirRezaiyann" target="_blank" rel="noopener noreferrer"><span data-i18n="contact_telegram">Message on Telegram</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 4.2 18.6 20c-.24 1.12-.86 1.4-1.74.88l-4.8-3.54-2.32 2.23c-.26.26-.48.48-.98.48l.35-4.9 8.92-8.06c.39-.35-.08-.55-.6-.2L6.4 13.9l-4.7-1.47c-1.02-.32-1.04-1.02.21-1.5L20.3 3.7c.85-.31 1.6.2 1.5.5Z"/></svg></a>
+            <a class="button button-secondary" href="tel:09910803518"><span data-i18n="contact_call">Call me</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16.4v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 1.1 3.7 2 2 0 0 1 3.1 1.5h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L7 9.2a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 2 2.3Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row"><span>© <span id="current-year"></span> AMIR REZAIYAN</span><span data-i18n="footer_note">Designed & built with care · Backend Engineer</span></div>
+  </footer>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const translations = {
+        en: {
+          page_title: 'Amir Rezaiyan — Backend Engineer',
+          nav_about: 'About', nav_skills: 'Skills', nav_experience: 'Experience', nav_approach: 'Approach', nav_contact: 'Contact',
+          hero_status: 'BACKEND ENGINEERING · PYTHON ECOSYSTEM', hero_eyebrow: "HELLO, I'M AMIR", hero_title: 'Backend Engineer.',
+          hero_bio: 'I build backend applications and APIs with Python, focusing on clear architecture, reliable data flows, and maintainable code.',
+          hero_working_with: 'WORKING WITH', hero_cta_contact: 'Get in touch', hero_cta_github: 'Explore GitHub', hero_focus: 'Backend-focused development',
+          card_experience_label: 'BACKEND EXPERIENCE', card_experience_value: '3+ YEARS', metric_experience_title: 'Backend Experience', metric_experience_sub: 'Years building backend systems',
+          metric_python_title: 'Python-focused', metric_python_sub: 'Backend development ecosystem', metric_api_title: 'API Engineering', metric_api_sub: 'Design, implementation & integration',
+          about_eyebrow: 'A LITTLE ABOUT ME', about_title: 'Thoughtful backend work, from the data layer up.',
+          about_text: "I'm a backend developer working primarily with Python and its web ecosystem. I enjoy turning product requirements into understandable APIs, well-structured data models, and codebases that remain practical to maintain as they grow.",
+          focus_api_title: 'Clear API design', focus_api_text: 'Building understandable REST endpoints, organizing application logic, and keeping the contract between services consistent.',
+          focus_data_title: 'Data and persistence', focus_data_text: 'Working with relational data, database design, query behavior, and caching patterns using PostgreSQL and Redis.',
+          focus_quality_title: 'Maintainability and quality', focus_quality_text: 'Keeping code organized, applying sound engineering practices, and making room for testing and future changes.',
+          skills_eyebrow: 'MY TOOLKIT', skills_title: 'Technologies I work with.', skills_intro: 'A backend-first toolkit for building web applications, APIs, and data-driven services.',
+          skill_languages: 'Language', skill_frameworks: 'Backend frameworks', skill_data: 'Databases & caching', skill_async: 'Async & messaging', skill_tools: 'Development tools', skill_web: 'Web fundamentals',
+          experience_eyebrow: "WHERE I'VE WORKED", experience_title: 'Experience & learning.', experience_intro: 'A concise overview of my professional experience and independent backend work.',
+          independent_date: 'SEP 2025 — PRESENT', independent_type: 'INDEPENDENT WORK', independent_title: 'Independent Backend Developer', independent_company: 'Independent Projects',
+          independent_text: 'Developing and improving backend-focused applications, working with Python web frameworks, REST APIs, relational databases, and maintainable application structure.',
+          greenplus_date: 'NOV 2024 — JUL 2025', greenplus_type: 'INTERNSHIP · 9 MONTHS', greenplus_title: 'Backend Developer Intern',
+          greenplus_text: "Completed a backend development internship. During the final three months, contributed to work on GreenPlus's own product as part of the development experience.",
+          approach_eyebrow: 'HOW I THINK ABOUT BACKEND', approach_title: 'Good software is built in the details.', approach_intro: 'The principles I try to bring into everyday engineering decisions.',
+          approach_structure_title: 'Organize before complexity grows', approach_structure_text: 'Clear boundaries and readable application structure make features easier to reason about, test, and extend.',
+          approach_data_title: 'Treat data as a design decision', approach_data_text: 'Thoughtful models, constraints, and query patterns are central to reliable applications and predictable behavior.',
+          approach_reliability_title: 'Make behavior predictable', approach_reliability_text: 'Validation, sensible error handling, and tests help keep APIs easier to use and maintain.',
+          contact_eyebrow: "LET'S CONNECT", contact_title: 'Have a backend challenge in mind?', contact_text: "I'm open to meaningful conversations, collaboration, and backend development opportunities. Feel free to reach out.",
+          contact_telegram: 'Message on Telegram', contact_call: 'Call me', footer_note: 'Designed & built with care · Backend Engineer'
+        },
+        fa: {
+          page_title: 'امیر رضائیان — توسعه‌دهنده بک‌اند',
+          nav_about: 'درباره من', nav_skills: 'مهارت‌ها', nav_experience: 'سوابق', nav_approach: 'رویکرد کاری', nav_contact: 'ارتباط',
+          hero_status: 'توسعه بک‌اند · اکوسیستم پایتون', hero_eyebrow: 'سلام، من امیر هستم', hero_title: 'توسعه‌دهنده بک‌اند.',
+          hero_bio: 'با پایتون اپلیکیشن‌ها و APIهای بک‌اند توسعه می‌دهم. تمرکزم روی معماری شفاف، جریان داده قابل‌اعتماد و کدی است که توسعه و نگهداری آن ساده باشد.',
+          hero_working_with: 'حوزه فعالیت', hero_cta_contact: 'ارتباط با من', hero_cta_github: 'مشاهده گیت‌هاب', hero_focus: 'تمرکز بر توسعه بک‌اند',
+          card_experience_label: 'تجربه توسعه بک‌اند', card_experience_value: 'بیش از ۳ سال', metric_experience_title: 'تجربه بک‌اند', metric_experience_sub: 'سال فعالیت در توسعه سیستم‌های بک‌اند',
+          metric_python_title: 'متمرکز بر پایتون', metric_python_sub: 'اکوسیستم توسعه بک‌اند', metric_api_title: 'مهندسی API', metric_api_sub: 'طراحی، پیاده‌سازی و یکپارچه‌سازی',
+          about_eyebrow: 'کمی درباره من', about_title: 'توسعه بک‌اند دقیق، از لایه داده تا API.',
+          about_text: 'من توسعه‌دهنده بک‌اند هستم و عمدتاً با پایتون و اکوسیستم وب آن کار می‌کنم. از تبدیل نیازهای محصول به APIهای قابل‌فهم، مدل‌های داده منظم و ساختارهایی که با بزرگ‌تر شدن پروژه همچنان قابل نگهداری بمانند لذت می‌برم.',
+          focus_api_title: 'طراحی شفاف API', focus_api_text: 'توسعه endpointهای قابل‌فهم REST، سازمان‌دهی منطق برنامه و حفظ قراردادهای یکپارچه میان بخش‌های مختلف سیستم.',
+          focus_data_title: 'داده و ماندگاری اطلاعات', focus_data_text: 'کار با داده‌های رابطه‌ای، طراحی پایگاه داده، بررسی رفتار کوئری‌ها و الگوهای کش با PostgreSQL و Redis.',
+          focus_quality_title: 'کیفیت و نگهداری‌پذیری', focus_quality_text: 'حفظ نظم کد، استفاده از اصول مهندسی نرم‌افزار و در نظر گرفتن تست‌پذیری و توسعه‌های آینده.',
+          skills_eyebrow: 'ابزارهای من', skills_title: 'تکنولوژی‌هایی که با آن‌ها کار می‌کنم.', skills_intro: 'مجموعه‌ای با تمرکز بر بک‌اند برای توسعه اپلیکیشن‌های وب، APIها و سرویس‌های داده‌محور.',
+          skill_languages: 'زبان برنامه‌نویسی', skill_frameworks: 'فریم‌ورک‌های بک‌اند', skill_data: 'پایگاه داده و کش', skill_async: 'پردازش ناهمگام و پیام‌رسانی', skill_tools: 'ابزارهای توسعه', skill_web: 'مبانی وب',
+          experience_eyebrow: 'سوابق کاری من', experience_title: 'تجربه و مسیر حرفه‌ای.', experience_intro: 'مروری کوتاه بر تجربه کاری و فعالیت‌های مستقل من در حوزه بک‌اند.',
+          independent_date: 'سپتامبر ۲۰۲۵ — اکنون', independent_type: 'فعالیت مستقل', independent_title: 'توسعه‌دهنده مستقل بک‌اند', independent_company: 'پروژه‌های مستقل',
+          independent_text: 'توسعه و بهبود اپلیکیشن‌های بک‌اند‌محور با استفاده از فریم‌ورک‌های وب پایتون، APIهای REST، پایگاه‌های داده رابطه‌ای و ساختار کد قابل نگهداری.',
+          greenplus_date: 'نوامبر ۲۰۲۴ — ژوئیه ۲۰۲۵', greenplus_type: 'کارآموزی · ۹ ماه', greenplus_title: 'کارآموز توسعه بک‌اند',
+          greenplus_text: 'دوره کارآموزی توسعه بک‌اند را در گرین‌پلاس گذراندم. در سه ماه پایانی دوره، در فعالیت‌های مرتبط با توسعه محصول خود شرکت مشارکت داشتم.',
+          approach_eyebrow: 'نگاه من به توسعه بک‌اند', approach_title: 'نرم‌افزار خوب در جزئیات ساخته می‌شود.', approach_intro: 'اصولی که سعی می‌کنم در تصمیم‌های روزمره مهندسی رعایت کنم.',
+          approach_structure_title: 'پیش از پیچیده شدن، ساختار بده', approach_structure_text: 'مرزبندی روشن و ساختار خوانای برنامه، درک، تست و توسعه قابلیت‌ها را ساده‌تر می‌کند.',
+          approach_data_title: 'داده را بخشی از طراحی بدان', approach_data_text: 'مدل‌سازی دقیق، محدودیت‌ها و الگوهای کوئری، برای ساخت برنامه‌های قابل‌اعتماد و رفتار قابل پیش‌بینی ضروری‌اند.',
+          approach_reliability_title: 'رفتار قابل پیش‌بینی ایجاد کن', approach_reliability_text: 'اعتبارسنجی، مدیریت منطقی خطا و تست به قابل استفاده و قابل نگهداری ماندن APIها کمک می‌کنند.',
+          contact_eyebrow: 'در ارتباط باشیم', contact_title: 'چالش بک‌اندی در ذهن داری؟', contact_text: 'برای گفتگوهای حرفه‌ای، همکاری و فرصت‌های توسعه بک‌اند آماده‌ام. خوشحال می‌شوم با من در ارتباط باشی.',
+          contact_telegram: 'ارسال پیام در تلگرام', contact_call: 'تماس با من', footer_note: 'با دقت طراحی و توسعه داده شده · توسعه‌دهنده بک‌اند'
+        }
+      };
+
+      const root = document.documentElement;
+      const langButton = document.getElementById('lang-toggle');
+      const nav = document.getElementById('nav-links');
+      const menuButton = document.getElementById('menu-toggle');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const langKey = 'amir-resume-language';
+      let currentLanguage = 'en';
+
+      function setLanguage(language) {
+        currentLanguage = translations[language] ? language : 'en';
+        root.lang = currentLanguage;
+        root.dir = currentLanguage === 'fa' ? 'rtl' : 'ltr';
+        document.title = translations[currentLanguage].page_title;
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const key = element.dataset.i18n;
+          const value = translations[currentLanguage][key];
+          if (typeof value === 'string') element.textContent = value;
         });
-    </script>
-</body>
+        langButton.textContent = currentLanguage === 'en' ? 'FA' : 'EN';
+        langButton.setAttribute('aria-label', currentLanguage === 'en' ? 'Switch to Persian' : 'Switch to English');
+        const metricCounter = document.querySelector('.count-up');
+        if (metricCounter && metricCounter.dataset.done === 'true') {
+          metricCounter.textContent = new Intl.NumberFormat(currentLanguage === 'fa' ? 'fa-IR' : 'en-US').format(Number(metricCounter.dataset.count));
+        }
+        try { localStorage.setItem(langKey, currentLanguage); } catch (_) { /* Storage can be unavailable in private contexts. */ }
+      }
 
+      try {
+        const savedLanguage = localStorage.getItem(langKey);
+        if (savedLanguage && translations[savedLanguage]) currentLanguage = savedLanguage;
+      } catch (_) { /* Use English when local storage is unavailable. */ }
+      setLanguage(currentLanguage);
+
+      langButton.addEventListener('click', () => setLanguage(currentLanguage === 'en' ? 'fa' : 'en'));
+      menuButton.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      });
+      nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+      }));
+
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      // Header surface and active navigation state.
+      const header = document.getElementById('site-header');
+      const sections = [...document.querySelectorAll('main section[id]')];
+      const navLinks = [...nav.querySelectorAll('a')];
+      function updateHeader() { header.classList.toggle('scrolled', window.scrollY > 20); }
+      updateHeader();
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+          });
+        }, { rootMargin: '-35% 0px -55% 0px' });
+        sections.forEach((section) => sectionObserver.observe(section));
+      }
+
+      // Reveal elements only when they enter the viewport.
+      const revealElements = document.querySelectorAll('.reveal');
+      if (!reducedMotion && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+        revealElements.forEach((element) => revealObserver.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add('is-visible'));
+      }
+
+      // Count the experience metric once when it becomes visible.
+      const counter = document.querySelector('.count-up');
+      function animateCounter() {
+        if (!counter || counter.dataset.done) return;
+        counter.dataset.done = 'true';
+        if (reducedMotion) { counter.textContent = new Intl.NumberFormat(currentLanguage === 'fa' ? 'fa-IR' : 'en-US').format(Number(counter.dataset.count)); return; }
+        const target = Number(counter.dataset.count) || 3;
+        const duration = 950;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = new Intl.NumberFormat(currentLanguage === 'fa' ? 'fa-IR' : 'en-US').format(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      if (counter && 'IntersectionObserver' in window && !reducedMotion) {
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+          if (entries.some((entry) => entry.isIntersecting)) { animateCounter(); observer.disconnect(); }
+        }, { threshold: .6 });
+        counterObserver.observe(counter);
+      } else { animateCounter(); }
+
+      // Typing animation for the backend stack.
+      const typingTarget = document.getElementById('typing-value');
+      const typingWords = ['Python', 'Django REST Framework', 'FastAPI', 'PostgreSQL', 'Redis'];
+      if (reducedMotion) {
+        typingTarget.textContent = 'Python · Django · APIs';
+      } else {
+        let wordIndex = 0, characterIndex = 0, deleting = false;
+        function typeNext() {
+          const word = typingWords[wordIndex];
+          characterIndex += deleting ? -1 : 1;
+          typingTarget.textContent = word.slice(0, characterIndex);
+          let delay = deleting ? 36 : 72;
+          if (!deleting && characterIndex === word.length) { deleting = true; delay = 1250; }
+          else if (deleting && characterIndex === 0) { deleting = false; wordIndex = (wordIndex + 1) % typingWords.length; delay = 250; }
+          window.setTimeout(typeNext, delay);
+        }
+        window.setTimeout(typeNext, 500);
+      }
+
+      // Pointer glow: subtle desktop-only interaction.
+      const pointerGlow = document.getElementById('pointer-glow');
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reducedMotion) {
+        window.addEventListener('pointermove', (event) => {
+          pointerGlow.style.left = `${event.clientX}px`;
+          pointerGlow.style.top = `${event.clientY}px`;
+          document.body.classList.add('pointer-active');
+        }, { passive: true });
+        document.addEventListener('pointerleave', () => document.body.classList.remove('pointer-active'));
+      }
+
+      // Lightweight canvas particles. Automatically disabled for reduced-motion users.
+      const canvas = document.getElementById('particle-canvas');
+      const context = canvas && canvas.getContext ? canvas.getContext('2d') : null;
+      if (context && !reducedMotion) {
+        let width = 0, height = 0, particles = [], animationFrame = 0;
+        const pointer = { x: -1000, y: -1000 };
+        function resizeCanvas() {
+          const bounds = canvas.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+          width = bounds.width; height = bounds.height;
+          canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+          const count = Math.min(55, Math.max(22, Math.floor(width / 23)));
+          particles = Array.from({ length: count }, () => ({
+            x: Math.random() * width, y: Math.random() * height,
+            vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
+            radius: Math.random() * 1.25 + .35
+          }));
+        }
+        function drawParticles() {
+          context.clearRect(0, 0, width, height);
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+            const dx = p.x - pointer.x, dy = p.y - pointer.y;
+            if (dx * dx + dy * dy < 10000) { p.x += dx * .0007; p.y += dy * .0007; }
+            context.beginPath(); context.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            context.fillStyle = 'rgba(151, 219, 169, .48)'; context.fill();
+            for (let j = i + 1; j < particles.length; j++) {
+              const q = particles[j], x = p.x - q.x, y = p.y - q.y, distance = x * x + y * y;
+              if (distance < 10500) {
+                context.beginPath(); context.moveTo(p.x, p.y); context.lineTo(q.x, q.y);
+                context.strokeStyle = `rgba(130, 192, 146, ${.075 * (1 - distance / 10500)})`;
+                context.lineWidth = .7; context.stroke();
+              }
+            }
+          }
+          animationFrame = requestAnimationFrame(drawParticles);
+        }
+        window.addEventListener('pointermove', (event) => {
+          const bounds = canvas.getBoundingClientRect();
+          pointer.x = event.clientX - bounds.left;
+          pointer.y = event.clientY - bounds.top;
+        }, { passive: true });
+        window.addEventListener('resize', resizeCanvas, { passive: true });
+        resizeCanvas(); drawParticles();
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) cancelAnimationFrame(animationFrame);
+          else if (!animationFrame || document.visibilityState === 'visible') drawParticles();
+        });
+      }
+    })();
+  </script>
+</body>
 </html>
